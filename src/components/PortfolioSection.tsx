@@ -11,8 +11,7 @@ import {
   Tr,
   Th,
   Td,
-  Collapse,
-  Tooltip
+  Collapse
 } from '@chakra-ui/react'
 import { MdAccountBalanceWallet } from 'react-icons/md'
 import {
@@ -23,6 +22,15 @@ import {
 } from 'react-icons/fi'
 import { FaSort } from 'react-icons/fa'
 import { assets, debts } from '../data/portfolioData'
+import InfoTooltipIcon from './InfoTooltipIcon'
+import {
+  EMPHASIZED_TOKENS,
+  formatNumber,
+  getAaveUtilization,
+  getMarketWalletAddress,
+  getProtocolIconSrc,
+  getTokenIconSrc
+} from './portfolioSectionUtils'
 
 export default function PortfolioSection() {
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false)
@@ -39,148 +47,29 @@ export default function PortfolioSection() {
   >(new Set())
   const [expandedDebts, setExpandedDebts] = useState<Set<string>>(new Set())
 
-  const toggleAsset = (token: string) => {
-    const newExpanded = new Set(expandedAssets)
-    if (newExpanded.has(token)) {
-      newExpanded.delete(token)
-    } else {
-      newExpanded.add(token)
-    }
-    setExpandedAssets(newExpanded)
+  const toggleSetValue = (
+    value: string,
+    setExpanded: React.Dispatch<React.SetStateAction<Set<string>>>
+  ) => {
+    setExpanded((previous) => {
+      const next = new Set(previous)
+      if (next.has(value)) {
+        next.delete(value)
+      } else {
+        next.add(value)
+      }
+      return next
+    })
   }
 
-  const togglePositionType = (key: string) => {
-    const newExpanded = new Set(expandedPositionTypes)
-    if (newExpanded.has(key)) {
-      newExpanded.delete(key)
-    } else {
-      newExpanded.add(key)
-    }
-    setExpandedPositionTypes(newExpanded)
-  }
-
-  const toggleToken = (key: string) => {
-    const newExpanded = new Set(expandedTokens)
-    if (newExpanded.has(key)) {
-      newExpanded.delete(key)
-    } else {
-      newExpanded.add(key)
-    }
-    setExpandedTokens(newExpanded)
-  }
-
-  const toggleProtocol = (key: string) => {
-    const newExpanded = new Set(expandedProtocols)
-    if (newExpanded.has(key)) {
-      newExpanded.delete(key)
-    } else {
-      newExpanded.add(key)
-    }
-    setExpandedProtocols(newExpanded)
-  }
-
-  const toggleWalletAddress = (key: string) => {
-    const newExpanded = new Set(expandedWalletAddresses)
-    if (newExpanded.has(key)) {
-      newExpanded.delete(key)
-    } else {
-      newExpanded.add(key)
-    }
-    setExpandedWalletAddresses(newExpanded)
-  }
-
-  const toggleDebt = (token: string) => {
-    const newExpanded = new Set(expandedDebts)
-    if (newExpanded.has(token)) {
-      newExpanded.delete(token)
-    } else {
-      newExpanded.add(token)
-    }
-    setExpandedDebts(newExpanded)
-  }
-
-  const getTokenIconSrc = (token: string): string | null => {
-    switch (token) {
-      case 'BTC':
-        return '/images/btc.png'
-      case 'ETH':
-        return '/images/eth.png'
-      case 'SOL':
-        return '/images/sol.png'
-      case 'USD':
-        return '/images/usd.png'
-      case 'USDC':
-        return '/images/usdc.png'
-      case 'WETH':
-        return '/images/WETH.png'
-      case 'wstETH':
-        return '/images/wstETH.png'
-      case 'rETH':
-        return '/images/rETH.png'
-      case 'weETH':
-        return '/images/weETH.png'
-      case 'aETH':
-        return '/images/aETH.png'
-      case 'cbETH':
-        return '/images/cbETH.png'
-      case 'MATIC':
-        return '/images/MATIC.png'
-      default:
-        return null
-    }
-  }
-
-  const getProtocolIconSrc = (protocol: string): string | null => {
-    switch (protocol) {
-      case 'Aave v3':
-        return '/images/aave.png'
-      case 'Curve':
-        return '/images/curve.png'
-      case 'Uniswap':
-        return '/images/uniswap.png'
-      default:
-        return null
-    }
-  }
-
-  const getAaveUtilization = (
-    protocol: string,
-    market?: string
-  ): string | null => {
-    if (protocol !== 'Aave v3') {
-      return null
-    }
-
-    if (market === 'Ethereum Core') {
-      return '-72%'
-    }
-
-    if (market === 'Arbitrum') {
-      return '-65%'
-    }
-
-    return null
-  }
-
-  const getMarketWalletAddress = (market?: string): string | null => {
-    if (market === 'Arbitrum') {
-      return '0xb5C9...Adf4'
-    }
-
-    if (market === 'Ethereum Core' || market === 'Ethereum') {
-      return '0xd833...8D10'
-    }
-
-    if (market === 'Base') {
-      return '0xa2D8...Bc3e'
-    }
-
-    return null
-  }
-
-  const formatNumber = (num: string) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
+  const toggleAsset = (token: string) => toggleSetValue(token, setExpandedAssets)
+  const togglePositionType = (key: string) =>
+    toggleSetValue(key, setExpandedPositionTypes)
+  const toggleToken = (key: string) => toggleSetValue(key, setExpandedTokens)
+  const toggleProtocol = (key: string) => toggleSetValue(key, setExpandedProtocols)
+  const toggleWalletAddress = (key: string) =>
+    toggleSetValue(key, setExpandedWalletAddresses)
+  const toggleDebt = (token: string) => toggleSetValue(token, setExpandedDebts)
 
   return (
     <Box
@@ -1022,30 +911,9 @@ export default function PortfolioSection() {
                                                                         <Text
                                                                           fontSize="14px"
                                                                           fontWeight={
-                                                                            token.token ===
-                                                                              'wstETH' ||
-                                                                              token.token ===
-                                                                              'rETH' ||
-                                                                              token.token ===
-                                                                              'weETH' ||
-                                                                              token.token ===
-                                                                              'cbETH' ||
-                                                                              token.token ===
-                                                                              'aETH' ||
-                                                                              token.token ===
-                                                                              'cbBTC' ||
-                                                                              token.token ===
-                                                                              'wBTC' ||
-                                                                              token.token ===
-                                                                              'WBTC' ||
-                                                                              token.token ===
-                                                                              'LBTC' ||
-                                                                              token.token ===
-                                                                              'eBTC' ||
-                                                                              token.token ===
-                                                                              'tBTC' ||
-                                                                              token.token ===
-                                                                              'MATIC'
+                                                                            EMPHASIZED_TOKENS.has(
+                                                                              token.token
+                                                                            )
                                                                               ? 'bold'
                                                                               : 'normal'
                                                                           }
@@ -1101,21 +969,7 @@ export default function PortfolioSection() {
                                                                               token.apy
                                                                             }
                                                                             %
-                                                                            <Tooltip
-                                                                              placement="left"
-                                                                              hasArrow
-                                                                              arrowShadowColor="#8A63D2"
-                                                                              bg="#26214B"
-                                                                              color="white"
-                                                                              border="1px solid"
-                                                                              borderColor="#8A63D2"
-                                                                              borderRadius="8px"
-                                                                              px={
-                                                                                2
-                                                                              }
-                                                                              py={
-                                                                                1.5
-                                                                              }
+                                                                            <InfoTooltipIcon
                                                                               label={
                                                                                 <Box>
                                                                                   <Text
@@ -1135,32 +989,11 @@ export default function PortfolioSection() {
                                                                                     {
                                                                                       token.apy
                                                                                     }
-
                                                                                     %
                                                                                   </Text>
                                                                                 </Box>
                                                                               }
-                                                                            >
-                                                                              <Box
-                                                                                as="span"
-                                                                                cursor="help"
-                                                                                display="inline-flex"
-                                                                              >
-                                                                                <Icon
-                                                                                  as={
-                                                                                    FiInfo
-                                                                                  }
-                                                                                  boxSize={
-                                                                                    4
-                                                                                  }
-                                                                                  color="#FFFFFF"
-                                                                                  _hover={{
-                                                                                    color:
-                                                                                      'gray.300'
-                                                                                  }}
-                                                                                />
-                                                                              </Box>
-                                                                            </Tooltip>
+                                                                            />
                                                                           </Flex>
                                                                         </Td>
                                                                       )}
@@ -1482,21 +1315,7 @@ export default function PortfolioSection() {
                                                                                           {formatNumber(
                                                                                             network.value
                                                                                           )}
-                                                                                          <Tooltip
-                                                                                            placement="left"
-                                                                                            hasArrow
-                                                                                            arrowShadowColor="#8A63D2"
-                                                                                            bg="#26214B"
-                                                                                            color="white"
-                                                                                            border="1px solid"
-                                                                                            borderColor="#8A63D2"
-                                                                                            borderRadius="8px"
-                                                                                            px={
-                                                                                              2
-                                                                                            }
-                                                                                            py={
-                                                                                              1.5
-                                                                                            }
+                                                                                          <InfoTooltipIcon
                                                                                             label={
                                                                                               <Box>
                                                                                                 <Text
@@ -1518,27 +1337,7 @@ export default function PortfolioSection() {
                                                                                                 </Text>
                                                                                               </Box>
                                                                                             }
-                                                                                          >
-                                                                                            <Box
-                                                                                              as="span"
-                                                                                              cursor="help"
-                                                                                              display="inline-flex"
-                                                                                            >
-                                                                                              <Icon
-                                                                                                as={
-                                                                                                  FiInfo
-                                                                                                }
-                                                                                                boxSize={
-                                                                                                  4
-                                                                                                }
-                                                                                                color="#FFFFFF"
-                                                                                                _hover={{
-                                                                                                  color:
-                                                                                                    'gray.300'
-                                                                                                }}
-                                                                                              />
-                                                                                            </Box>
-                                                                                          </Tooltip>
+                                                                                          />
                                                                                         </Flex>
                                                                                       </Td>
                                                                                     </Tr>
@@ -1924,21 +1723,7 @@ export default function PortfolioSection() {
                                                                             protocol.apy
                                                                           }
                                                                           %
-                                                                          <Tooltip
-                                                                            placement="left"
-                                                                            hasArrow
-                                                                            arrowShadowColor="#8A63D2"
-                                                                            bg="#26214B"
-                                                                            color="white"
-                                                                            border="1px solid"
-                                                                            borderColor="#8A63D2"
-                                                                            borderRadius="8px"
-                                                                            px={
-                                                                              2
-                                                                            }
-                                                                            py={
-                                                                              1.5
-                                                                            }
+                                                                          <InfoTooltipIcon
                                                                             label={
                                                                               <Box>
                                                                                 <Text
@@ -1959,49 +1744,26 @@ export default function PortfolioSection() {
                                                                                   {
                                                                                     protocol.apy
                                                                                   }
-
                                                                                   %
                                                                                 </Text>
                                                                                 {getAaveUtilization(
                                                                                   protocol.protocol,
                                                                                   protocol.market
                                                                                 ) && (
-                                                                                    <Text
-                                                                                      fontSize="11px"
-                                                                                      mt={
-                                                                                        1
-                                                                                      }
-                                                                                    >
-                                                                                      Utilization{' '}
-                                                                                      {getAaveUtilization(
-                                                                                        protocol.protocol,
-                                                                                        protocol.market
-                                                                                      )}
-                                                                                    </Text>
-                                                                                  )}
+                                                                                  <Text
+                                                                                    fontSize="11px"
+                                                                                    mt={1}
+                                                                                  >
+                                                                                    Utilization{' '}
+                                                                                    {getAaveUtilization(
+                                                                                      protocol.protocol,
+                                                                                      protocol.market
+                                                                                    )}
+                                                                                  </Text>
+                                                                                )}
                                                                               </Box>
                                                                             }
-                                                                          >
-                                                                            <Box
-                                                                              as="span"
-                                                                              cursor="help"
-                                                                              display="inline-flex"
-                                                                            >
-                                                                              <Icon
-                                                                                as={
-                                                                                  FiInfo
-                                                                                }
-                                                                                boxSize={
-                                                                                  4
-                                                                                }
-                                                                                color="#FFFFFF"
-                                                                                _hover={{
-                                                                                  color:
-                                                                                    'gray.300'
-                                                                                }}
-                                                                              />
-                                                                            </Box>
-                                                                          </Tooltip>
+                                                                          />
                                                                         </Flex>
                                                                       </Td>
                                                                     )}
@@ -3271,21 +3033,7 @@ export default function PortfolioSection() {
                                                                                             {formatNumber(
                                                                                               token.value
                                                                                             )}
-                                                                                            <Tooltip
-                                                                                              placement="left"
-                                                                                              hasArrow
-                                                                                              arrowShadowColor="#8A63D2"
-                                                                                              bg="#26214B"
-                                                                                              color="white"
-                                                                                              border="1px solid"
-                                                                                              borderColor="#8A63D2"
-                                                                                              borderRadius="8px"
-                                                                                              px={
-                                                                                                2
-                                                                                              }
-                                                                                              py={
-                                                                                                1.5
-                                                                                              }
+                                                                                            <InfoTooltipIcon
                                                                                               label={
                                                                                                 <Box>
                                                                                                   <Text
@@ -3307,27 +3055,7 @@ export default function PortfolioSection() {
                                                                                                   </Text>
                                                                                                 </Box>
                                                                                               }
-                                                                                            >
-                                                                                              <Box
-                                                                                                as="span"
-                                                                                                cursor="help"
-                                                                                                display="inline-flex"
-                                                                                              >
-                                                                                                <Icon
-                                                                                                  as={
-                                                                                                    FiInfo
-                                                                                                  }
-                                                                                                  boxSize={
-                                                                                                    4
-                                                                                                  }
-                                                                                                  color="#FFFFFF"
-                                                                                                  _hover={{
-                                                                                                    color:
-                                                                                                      'gray.300'
-                                                                                                  }}
-                                                                                                />
-                                                                                              </Box>
-                                                                                            </Tooltip>
+                                                                                            />
                                                                                           </Flex>
                                                                                         </Td>
                                                                                       </Tr>
