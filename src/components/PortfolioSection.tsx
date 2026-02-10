@@ -4,8 +4,8 @@ import { MdAccountBalanceWallet } from 'react-icons/md'
 import { FiChevronDown, FiChevronRight, FiChevronUp, FiInfo } from 'react-icons/fi'
 import { FaBitcoin, FaEthereum, FaSort } from 'react-icons/fa'
 import { SiSolana } from 'react-icons/si'
-import type { AssetData } from '../types/portfolio'
 import { assets, debts } from '../data/portfolioData'
+
 
 export default function PortfolioSection() {
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false)
@@ -655,7 +655,7 @@ export default function PortfolioSection() {
                                                                                             color="gray.400"
                                                                                           />
                                                                                         )}
-                                                                                        <Icon as={MdFolder} boxSize={4} color="gray.400" />
+                                                                                        <Icon as={MdAccountBalanceWallet} boxSize={4} color="gray.400" />
                                                                                         <Text fontFamily="monospace" fontSize="12px">
                                                                                           {wallet.address}
                                                                                         </Text>
