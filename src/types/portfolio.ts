@@ -3,6 +3,7 @@ export interface NetworkData {
   tokenAmount: string
   balance: string
   value: string
+  walletAddress?: string
 }
 
 export interface SuppliedBorrowedToken {

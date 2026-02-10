@@ -35,16 +35,6 @@ export default function AssetsDistribution() {
               </Pie>
             </PieChart>
           </ResponsiveContainer>
-          <Flex
-            position="absolute"
-            top="50%"
-            left="125px"
-            transform="translate(-50%, -50%)"
-            direction="column"
-            align="center"
-          >
-            <Text fontSize="18px" fontWeight="bold">Assets</Text>
-          </Flex>
         </Box>
 
         <Box>

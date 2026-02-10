@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { Box, Flex, Text, Icon, Table, Thead, Tbody, Tr, Th, Td, Collapse } from '@chakra-ui/react'
 import { MdAccountBalance } from 'react-icons/md'
 import { FiChevronDown, FiChevronRight, FiChevronUp } from 'react-icons/fi'
@@ -83,9 +83,8 @@ export default function DeFiLoans() {
                 const isExpanded = expandedDebts.has(debt.token)
 
                 return (
-                  <>
+                  <React.Fragment key={debt.token}>
                     <Tr
-                      key={debt.token}
                       cursor="pointer"
                       onClick={() => toggleDebt(debt.token)}
                         _hover={{ bg: '#2A2641' }}
@@ -119,7 +118,7 @@ export default function DeFiLoans() {
                         </Td>
                       </Tr>
                     )}
-                  </>
+                  </React.Fragment>
                 )
               })}
               <Tr borderTop="1px solid" borderColor="gray.700">

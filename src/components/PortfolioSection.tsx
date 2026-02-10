@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Box, Flex, Text, Icon, Table, Thead, Tbody, Tr, Th, Td, Collapse } from '@chakra-ui/react'
+import { Box, Flex, Text, Icon, Image, Table, Thead, Tbody, Tr, Th, Td, Collapse, Tooltip } from '@chakra-ui/react'
 import { MdAccountBalanceWallet } from 'react-icons/md'
 import { FiChevronDown, FiChevronRight, FiChevronUp, FiInfo } from 'react-icons/fi'
-import { FaBitcoin, FaEthereum, FaSort } from 'react-icons/fa'
-import { SiSolana } from 'react-icons/si'
+import { FaSort } from 'react-icons/fa'
 import { assets, debts } from '../data/portfolioData'
 
 
@@ -76,14 +75,18 @@ export default function PortfolioSection() {
     setExpandedDebts(newExpanded)
   }
 
-  const getTokenIcon = (token: string) => {
+  const getTokenIconSrc = (token: string): string | null => {
     switch (token) {
       case 'BTC':
-        return FaBitcoin
+        return '/images/btc.png'
       case 'ETH':
-        return FaEthereum
+        return '/images/eth.png'
       case 'SOL':
-        return SiSolana
+        return '/images/sol.png'
+      case 'USD':
+        return '/images/usd.png'
+      case 'WETH':
+        return '/images/WETH.png'
       default:
         return null
     }
@@ -94,7 +97,7 @@ export default function PortfolioSection() {
   }
 
   return (
-    <Box bg="#110E22" borderRadius="12px" p={6} mb={6}>
+    <Box bg="#110E22" borderRadius="12px" p={6} pr={8} mb={6}>
       <Flex justify="space-between" align="center" mb={4}>
         <Flex align="center" gap={3}>
           <Icon as={MdAccountBalanceWallet} boxSize={6} color="#7D67FF" />
@@ -129,30 +132,30 @@ export default function PortfolioSection() {
           <Text fontSize="18px" fontWeight="bold" mb={4} color="#FFC063" pb={2}>
             Total Assets
           </Text>
-          <Box overflowX="auto">
-            <Table variant="simple" size="sm">
+          <Box overflowX="auto" pr={4}>
+            <Table variant="simple" size="sm" width="100%">
               <Thead>
                 <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="35px" textAlign="left">
-                    <Flex align="center" gap={2} justify="flex-start">
+                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left">
+                    <Flex align="center" gap={2} justify="flex-start" pl={28} fontWeight={"bold"}>
                       Token
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
                   </Th>
-                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" isNumeric h="35px">
-                    <Flex align="center" gap={2} justify="flex-end">
+                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px">
+                    <Flex align="center" gap={2} justify="flex-start" pl={10} fontWeight={"bold"}>
                       Balance
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
                   </Th>
-                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" isNumeric h="35px">
-                    <Flex align="center" gap={2} justify="flex-end">
+                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px">
+                    <Flex align="center" gap={2} justify="flex-start" pl={10} fontWeight={"bold"}>
                       Percentage
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
                   </Th>
-                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" h="35px">
-                    <Flex align="center" gap={2} justify="flex-end">
+                  <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left">
+                    <Flex align="center" gap={2} justify="flex-start" pr={10} fontWeight={"bold"}>
                       Value (USD)
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
@@ -163,20 +166,19 @@ export default function PortfolioSection() {
                 {assets.map((asset) => {
                   const isExpanded = expandedAssets.has(asset.token)
                   const hasChildren = asset.positionTypes && asset.positionTypes.length > 0
-                  const TokenIcon = getTokenIcon(asset.token)
+                  const tokenIconSrc = getTokenIconSrc(asset.token)
 
                   return (
-                    <>
+                    <React.Fragment key={asset.token}>
                       <Tr
-                        key={asset.token}
                         cursor={hasChildren ? 'pointer' : 'default'}
                         onClick={() => hasChildren && toggleAsset(asset.token)}
                         _hover={hasChildren ? { bg: '#2A2641' } : {}}
                         borderBottom="1px solid"
                         borderColor="#2A2A35"
                       >
-                        <Td h="35px">
-                          <Flex align="center" gap={2}>
+                        <Td h="45px">
+                          <Flex align="center" gap={2} pl={28}>
                             {hasChildren && (
                               <Icon
                                 as={isExpanded ? FiChevronDown : FiChevronRight}
@@ -184,20 +186,10 @@ export default function PortfolioSection() {
                                 color="gray.400"
                               />
                             )}
-                            {TokenIcon && (
-                              <Icon
-                                as={TokenIcon}
-                                boxSize={5}
-                                color={
-                                  asset.token === 'BTC'
-                                    ? '#FFC063'
-                                    : asset.token === 'ETH'
-                                    ? '#2268D1'
-                                    : '#21D6AE'
-                                }
-                              />
+                            {tokenIconSrc && (
+                              <Image src={tokenIconSrc} alt={asset.token} boxSize={5} />
                             )}
-                            {!TokenIcon && asset.token === 'USD' && (
+                            {!tokenIconSrc && asset.token === 'USD' && (
                               <Text fontSize="18px" fontWeight="bold" color="#FFC063">
                                 $
                               </Text>
@@ -205,40 +197,46 @@ export default function PortfolioSection() {
                             <Text fontWeight="500">{asset.token}</Text>
                           </Flex>
                         </Td>
-                        <Td h="35px" isNumeric>{formatNumber(asset.balance)}</Td>
-                        <Td h="35px" isNumeric>{asset.percentage}%</Td>
-                        <Td h="35px" isNumeric fontWeight="600">
-                          {formatNumber(asset.value)} USD
+                        <Td h="45px">
+                          <Flex justify="flex-start" pl={10}>{formatNumber(asset.balance)} </Flex>
+                        </Td>
+                        <Td h="45px">
+                          <Flex justify="flex-start" pl={10}>{asset.percentage}%</Flex>
+                        </Td>
+                        <Td h="45px">
+                          <Flex justify="flex-start" pr={10}>
+                            {formatNumber(asset.value)}
+                          </Flex>
                         </Td>
                       </Tr>
                       {hasChildren && (
                         <Tr>
                           <Td colSpan={4} p={0} h={isExpanded ? "auto" : "0"}>
                             <Collapse in={isExpanded} animateOpacity>
-                              <Box py={0} pl={8} bg="#110E22" borderLeft="2px solid" borderColor="#2A2A35">
+                              <Box py={0} bg="#110E22">
                                 <Table variant="simple" size="sm" sx={{ borderSpacing: 0, borderCollapse: 'collapse', tableLayout: 'fixed', width: '100%' }}>
                                   <Thead>
                                     <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="35px" textAlign="left" minW="200px" w="25%">
-                                        <Flex align="center" gap={2} justify="flex-start" pl={8}>
+                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left"  sx={{ whiteSpace: 'nowrap' }}>
+                                        <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"} pl={40}>
                                           Position Type
                                           <Icon as={FaSort} boxSize={4} color="white" />
                                         </Flex>
                                       </Th>
-                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" h="35px">
-                                        <Flex align="center" gap={2} justify="flex-end">
+                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left" sx={{ whiteSpace: 'nowrap' }}>
+                                        <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"} pl={28}>
                                           Balance ({asset.token})
                                           <Icon as={FaSort} boxSize={4} color="white" />
                                         </Flex>
                                       </Th>
-                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" h="35px">
-                                        <Flex align="center" gap={2} justify="flex-end">
+                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left" >
+                                        <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"} pl={16}>
                                           Percentage
                                           <Icon as={FaSort} boxSize={4} color="white" />
                                         </Flex>
                                       </Th>
-                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" h="35px">
-                                        <Flex align="center" gap={2} justify="flex-end" pr={28}>
+                                      <Th color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" h="45px" textAlign="left" >
+                                        <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"} pl={4}>
                                           Value (USD)
                                           <Icon as={FaSort} boxSize={4} color="white" />
                                         </Flex>
@@ -262,8 +260,8 @@ export default function PortfolioSection() {
                                             borderBottom="1px solid"
                                             borderColor="#2A2A35"
                                           >
-                                            <Td h="35px" minW="200px" w="25%">
-                                              <Flex align="center" gap={2} pl={8} pr={4}>
+                                            <Td h="45px" pl={40}>
+                                              <Flex align="center" gap={2} sx={{ whiteSpace: 'nowrap' }}>
                                                 {(hasTokens || hasProtocols) && (
                                                   <Icon
                                                     as={isPositionExpanded ? FiChevronDown : FiChevronRight}
@@ -274,11 +272,15 @@ export default function PortfolioSection() {
                                                 <Text>{positionType.positionType}</Text>
                                               </Flex>
                                             </Td>
-                                            <Td h="35px" isNumeric>{formatNumber(positionType.balance)}</Td>
-                                            <Td h="35px" isNumeric>{positionType.percentage}%</Td>
-                                            <Td h="35px" isNumeric fontWeight="600">
-                                              <Flex justify="flex-end" pr={18}>
-                                                {formatNumber(positionType.value)} USD
+                                            <Td h="45px" textAlign="left" >
+                                              <Flex justify="flex-start" pl={28}>{formatNumber(positionType.balance)}</Flex>
+                                            </Td>
+                                            <Td h="45px" textAlign="left" >
+                                              <Flex justify="flex-start" pl={16}>{positionType.percentage}%</Flex>
+                                            </Td>
+                                            <Td h="45px" textAlign="left" >
+                                              <Flex justify="flex-start" pl={4}>
+                                                {formatNumber(positionType.value)}
                                               </Flex>
                                             </Td>
                                           </Tr>
@@ -287,32 +289,32 @@ export default function PortfolioSection() {
                                             <Tr sx={{ verticalAlign: 'top' }}>
                                               <Td colSpan={4} p={0} m={0} verticalAlign="top" sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important', lineHeight: 0 }}>
                                                 <Collapse in={isPositionExpanded} animateOpacity>
-                                                  <Box py={0} m={0} pl={8} bg="#110E22" sx={{ lineHeight: 'normal' }} borderLeft="2px solid" borderColor="#2A2A35">
+                                                  <Box py={0} m={0} bg="#110E22" sx={{ lineHeight: 'normal' }}>
                                                     <Table variant="simple" size="sm" sx={{ borderSpacing: 0, borderCollapse: 'collapse' }}>
                                                       <Thead>
                                                         <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                          <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" minW="200px" w="25%">
-                                                            <Flex align="center" gap={2} pl={20} justify="flex-start">
+                                                          <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
+                                                            <Flex align="center" gap={2} justify="flex-start" pl={48}>
                                                               Token
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
                                                           </Th>
                                                           {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && (
                                                             <>
-                                                              <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833">
                                                                 <Flex align="center" gap={2}>
                                                                   Token Amount
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
-                                                              <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
+                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                   Balance ({asset.token})
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
-                                                              <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
+                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                   APY (%)
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
@@ -321,16 +323,16 @@ export default function PortfolioSection() {
                                                           )}
                                                           {positionType.positionType === 'Wallet Balance' && (
                                                             <>
-                                                              <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
+                                                                <Flex align="center" gap={2} justify="flex-start" pl={20}>
                                                                   Balance ({asset.token})
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
                                                             </>
                                                           )}
-                                                          <Th h="35px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                            <Flex align="center" gap={2} justify="flex-end" pr={20}>
+                                                          <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
+                                                            <Flex align="center" gap={2} justify="flex-start" pl={44} >
                                                               Value (USD)
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
@@ -344,17 +346,16 @@ export default function PortfolioSection() {
                                                           const hasNetworks = token.networks && token.networks.length > 0
 
                                                           return (
-                                                            <>
+                                                            <React.Fragment key={tokenKey}>
                                                               <Tr
-                                                                key={tokenKey}
                                                                 cursor={hasNetworks ? 'pointer' : 'default'}
                                                                 onClick={() => hasNetworks && toggleToken(tokenKey)}
                                                                 _hover={hasNetworks ? { bg: '#2A2641' } : {}}
                                                                 borderBottom="1px solid"
                                                                 borderColor="#2A2A35"
                                                               >
-                                                                <Td h="35px" minW="200px" w="25%">
-                                                                  <Flex align="center" gap={2} pl={20}>
+                                                                <Td h="45px">
+                                                                  <Flex align="center" gap={2} pl={48}>
                                                                     {hasNetworks && (
                                                                       <Icon
                                                                         as={isTokenExpanded ? FiChevronDown : FiChevronRight}
@@ -363,12 +364,15 @@ export default function PortfolioSection() {
                                                                       />
                                                                     )}
                                                                     {token.token === 'ETH' && (
-                                                                      <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
+                                                                      <Image src="/images/eth.png" alt="ETH" boxSize={5} />
                                                                     )}
                                                                     {token.token === 'BTC' && (
-                                                                      <Icon as={FaBitcoin} boxSize={5} color="#FFC063" />
+                                                                      <Image src="/images/btc.png" alt="BTC" boxSize={5} />
                                                                     )}
-                                                                    {(token.token === 'WETH' || token.token === 'wstETH' || token.token === 'rETH' || token.token === 'weETH' || token.token === 'cbETH' || token.token === 'aETH' || token.token === 'cbBTC' || token.token === 'wBTC' || token.token === 'WBTC' || token.token === 'LBTC' || token.token === 'eBTC' || token.token === 'tBTC') && (
+                                                                    {token.token === 'WETH' && (
+                                                                      <Image src="/images/WETH.png" alt="WETH" boxSize={5} />
+                                                                    )}
+                                                                    {(token.token === 'wstETH' || token.token === 'rETH' || token.token === 'weETH' || token.token === 'cbETH' || token.token === 'aETH' || token.token === 'cbBTC' || token.token === 'wBTC' || token.token === 'WBTC' || token.token === 'LBTC' || token.token === 'eBTC' || token.token === 'tBTC') && (
                                                                       <Text fontSize="14px" fontWeight="bold">
                                                                         {token.token}
                                                                       </Text>
@@ -382,20 +386,22 @@ export default function PortfolioSection() {
                                                                   </Flex>
                                                                 </Td>
                                                                 {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && token.tokenAmount && (
-                                                                  <Td h="35px">{token.tokenAmount}</Td>
+                                                                  <Td h="45px">{token.tokenAmount}</Td>
                                                                 )}
-                                                                <Td h="35px" isNumeric>{formatNumber(token.balance)}</Td>
+                                                                <Td h="45px" textAlign="left">
+                                                                  <Flex justify="flex-start" pl={20}>{formatNumber(token.balance)}</Flex>
+                                                                </Td>
                                                                 {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && token.apy && (
-                                                                  <Td h="35px" isNumeric>
-                                                                    <Flex align="center" gap={1}>
+                                                                  <Td h="45px">
+                                                                    <Flex align="center" gap={1} justify="flex-start">
                                                                       {token.apy}%
                                                                       <Icon as={FiInfo} boxSize={3} color="gray.400" />
                                                                     </Flex>
                                                                   </Td>
                                                                 )}
-                                                                <Td h="35px" isNumeric fontWeight="600">
-                                                                  <Flex justify="flex-end" pr={20}>
-                                                                    {formatNumber(token.value)} USD
+                                                                <Td h="45px" textAlign="left" >
+                                                                  <Flex justify="flex-start" pl={44}>
+                                                                    {formatNumber(token.value)}
                                                                   </Flex>
                                                                 </Td>
                                                               </Tr>
@@ -403,30 +409,30 @@ export default function PortfolioSection() {
                                                                 <Tr sx={{ verticalAlign: 'top' }}>
                                                                   <Td colSpan={(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') ? 5 : 3} p={0} m={0} verticalAlign="top" sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important', lineHeight: 0 }}>
                                                                     <Collapse in={isTokenExpanded} animateOpacity>
-                                                                      <Box py={0} m={0} pl={8} bg="#110E22" sx={{ lineHeight: 'normal' }} borderLeft="2px solid" borderColor="#2A2A35">
+                                                                      <Box py={0} m={0} bg="#110E22" sx={{ lineHeight: 'normal' }}>
                                                                         <Table variant="simple" size="sm" sx={{ borderSpacing: 0, borderCollapse: 'collapse' }}>
                                                                           <Thead>
                                                                             <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                <Flex align="center" gap={2} pl={28} pr={4} justify="flex-start">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                <Flex align="center" gap={2} pr={4} justify="flex-start" pl={60}>
                                                                                   Network
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
-                                                                                <Flex align="center" gap={2}>
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
+                                                                                <Flex align="center" gap={2} pl={10} >
                                                                                   Token Amount
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px" textAlign="right">
+                                                                                <Flex align="center" gap={2} justify="flex-start" pl={10}>
                                                                                   Balance ({asset.token})
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end" pr={4}>
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px" textAlign="right" >
+                                                                                <Flex align="center" gap={2} justify="flex-start" pl={10}>
                                                                                   Value (USD)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
@@ -440,12 +446,13 @@ export default function PortfolioSection() {
                                                                                 borderBottom="1px solid"
                                                                                 borderColor="#2A2A35"
                                                                               >
-                                                                                <Td h="35px">
-                                                                                  <Flex align="center" gap={2} pl={28} pr={4}>                                                                                    {network.network === 'Arbitrum' && (
-                                                                                      <Box w={5} h={5} bg="#2268D1" borderRadius="50%" />
+                                                                                <Td h="45px">
+                                                                                  <Flex align="center" gap={2} pl={60}>
+                                                                                    {network.network === 'Arbitrum' && (
+                                                                                      <Image src="/images/arbitrum,.png" alt="Arbitrum" boxSize={5} />
                                                                                     )}
                                                                                     {network.network === 'Ethereum' && (
-                                                                                      <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
+                                                                                      <Image src="/images/eth.png" alt="ETH" boxSize={5} />
                                                                                     )}
                                                                                     {network.network === 'Base' && (
                                                                                       <Box w={5} h={5} bg="#1A71FF" borderRadius="50%" />
@@ -453,12 +460,39 @@ export default function PortfolioSection() {
                                                                                     <Text>{network.network}</Text>
                                                                                   </Flex>
                                                                                 </Td>
-                                                                                <Td h="35px">{network.tokenAmount}</Td>
-                                                                                <Td h="35px" isNumeric>{formatNumber(network.balance)}</Td>
-                                                                                <Td h="35px" isNumeric fontWeight="600">
-                                                                                  <Flex align="center" gap={1} justify="flex-end" pr={4}>
+                                                                                <Td h="45px">
+                                                                                  <Flex align="center" gap={3} justify="flex-start" pl={10}>
+                                                                                    {network.tokenAmount}
+                                                                                  </Flex>
+                                                                                </Td>
+                                                                                <Td h="45px" textAlign="left">
+                                                                                  <Flex justify="flex-start" pl={10}>{formatNumber(network.balance)}</Flex>
+                                                                                </Td>
+                                                                                <Td h="45px" textAlign="left">
+                                                                                  <Flex align="center" gap={3} justify="flex-start" pl={10}>
                                                                                     {formatNumber(network.value)} USD
-                                                                                    <Icon as={FiInfo} boxSize={3} color="gray.400" />
+                                                                                    <Tooltip
+                                                                                      placement="left"
+                                                                                      hasArrow
+                                                                                      arrowShadowColor="#8A63D2"
+                                                                                      bg="#26214B"
+                                                                                      color="white"
+                                                                                      border="1px solid"
+                                                                                      borderColor="#8A63D2"
+                                                                                      borderRadius="8px"
+                                                                                      px={2}
+                                                                                      py={1.5}
+                                                                                      label={
+                                                                                        <Box>
+                                                                                          <Text fontWeight="bold" fontSize="11px" mb={0.5}>Wallet Address</Text>
+                                                                                          <Text fontSize="11px" textDecoration="underline">{network.walletAddress ?? `${formatNumber(network.value)} USD`}</Text>
+                                                                                        </Box>
+                                                                                      }
+                                                                                    >
+                                                                                      <Box as="span" cursor="help" display="inline-flex">
+                                                                                        <Icon as={FiInfo} boxSize={4} color="#FFFFFF" _hover={{ color: 'gray.300' }} />
+                                                                                      </Box>
+                                                                                    </Tooltip>
                                                                                   </Flex>
                                                                                 </Td>
                                                                               </Tr>
@@ -470,7 +504,7 @@ export default function PortfolioSection() {
                                                                   </Td>
                                                                 </Tr>
                                                               )}
-                                                            </>
+                                                            </React.Fragment>
                                                           )
                                                         })}
                                                       </Tbody>
@@ -485,12 +519,12 @@ export default function PortfolioSection() {
                                             <Tr>
                                               <Td colSpan={4} p={0} m={0} sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important' }}>
                                                 <Collapse in={isPositionExpanded} animateOpacity>
-                                                  <Box py={0} pl={8} bg="#110E22" borderLeft="2px solid" borderColor="#2A2A35">
+                                                  <Box py={0} bg="#110E22">
                                                     <Table variant="simple" size="sm">
                                                       <Thead>
                                                         <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                            <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                            <Flex align="center" gap={2} justify="flex-start">
                                                               Protocol
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
@@ -498,45 +532,45 @@ export default function PortfolioSection() {
                                                           {(positionType.positionType === 'Liquidity Pools' || 
                                                             positionType.positionType === 'Collateral' ||
                                                             positionType.positionType === 'Yield Loops') && (
-                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                               <Flex align="center" gap={2}>
                                                                 Market
                                                                 <Icon as={FaSort} boxSize={4} color="white" />
                                                               </Flex>
                                                             </Th>
                                                           )}
-                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                            <Flex align="center" gap={2} justify="flex-end">
+                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                            <Flex align="center" gap={2} justify="flex-start">
                                                               Balance ({asset.token})
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
                                                           </Th>
                                                           {positionType.positionType === 'Liquidity Pools' && (
-                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                              <Flex align="center" gap={2} justify="flex-end">
+                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                              <Flex align="center" gap={2} justify="flex-start">
                                                                 Percentage
                                                                 <Icon as={FaSort} boxSize={4} color="white" />
                                                               </Flex>
                                                             </Th>
                                                           )}
                                                           {positionType.positionType === 'Collateral' && (
-                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                              <Flex align="center" gap={2} justify="flex-end">
+                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                              <Flex align="center" gap={2} justify="flex-start">
                                                                 APY (%)
                                                                 <Icon as={FaSort} boxSize={4} color="white" />
                                                               </Flex>
                                                             </Th>
                                                           )}
                                                           {positionType.positionType === 'Yield Loops' && (
-                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                              <Flex align="center" gap={2} justify="flex-end">
+                                                            <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                              <Flex align="center" gap={2} justify="flex-start">
                                                                 Net APY
                                                                 <Icon as={FaSort} boxSize={4} color="white" />
                                                               </Flex>
                                                             </Th>
                                                           )}
-                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                            <Flex align="center" gap={2} justify="flex-end">
+                                                          <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                            <Flex align="center" gap={2} justify="flex-start">
                                                               Value (USD)
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
@@ -552,17 +586,16 @@ export default function PortfolioSection() {
                                                           const hasWalletAddresses = protocol.walletAddresses && protocol.walletAddresses.length > 0
 
                                                           return (
-                                                            <>
+                                                            <React.Fragment key={protocolKey}>
                                                               <Tr
-                                                                key={protocolKey}
                                                                 cursor={hasTokens || hasPoolPairs || hasWalletAddresses ? 'pointer' : 'default'}
                                                                 onClick={() => (hasTokens || hasPoolPairs || hasWalletAddresses) && toggleProtocol(protocolKey)}
                                                                 _hover={hasTokens || hasPoolPairs || hasWalletAddresses ? { bg: '#2A2641' } : {}}
                                                                 borderBottom="1px solid"
                                                                 borderColor="#2A2A35"
                                                               >
-                                                                <Td h="35px">
-                                                                  <Flex align="center" gap={2} pl={8}>
+                                                                <Td h="45px">
+                                                                  <Flex align="center" gap={2}>
                                                                     {(hasTokens || hasPoolPairs || hasWalletAddresses) && (
                                                                       <Icon
                                                                         as={isProtocolExpanded ? FiChevronDown : FiChevronRight}
@@ -573,11 +606,11 @@ export default function PortfolioSection() {
                                                                     <Text>{protocol.protocol}</Text>
                                                                   </Flex>
                                                                 </Td>
-                                                                {protocol.market && <Td h="35px">{protocol.market}</Td>}
-                                                                <Td h="35px" isNumeric>{formatNumber(protocol.balance)}</Td>
-                                                                {protocol.percentage && <Td h="35px" isNumeric>{protocol.percentage}%</Td>}
+                                                                {protocol.market && <Td h="45px">{protocol.market}</Td>}
+                                                                <Td h="45px" isNumeric>{formatNumber(protocol.balance)}</Td>
+                                                                {protocol.percentage && <Td h="45px" isNumeric>{protocol.percentage}%</Td>}
                                                                 {protocol.apy && (
-                                                                  <Td h="35px" isNumeric>
+                                                                  <Td h="45px" isNumeric>
                                                                     <Flex align="center" gap={1}>
                                                                       {protocol.apy}%
                                                                       <Icon as={FiInfo} boxSize={3} color="gray.400" />
@@ -585,13 +618,13 @@ export default function PortfolioSection() {
                                                                   </Td>
                                                                 )}
                                                                 {protocol.netApy && (
-                                                                  <Td h="35px" isNumeric>
+                                                                  <Td h="45px" isNumeric>
                                                                     <Flex align="center" gap={1}>
                                                                       <Text color="#3EDD87">{protocol.netApy}%</Text>
                                                                     </Flex>
                                                                   </Td>
                                                                 )}
-                                                                <Td h="35px" isNumeric fontWeight="600">
+                                                                <Td h="45px" isNumeric fontWeight="600">
                                                                   {formatNumber(protocol.value)} USD
                                                                 </Td>
                                                               </Tr>
@@ -600,30 +633,30 @@ export default function PortfolioSection() {
                                                                 <Tr>
                                                                   <Td colSpan={positionType.positionType === 'Yield Loops' ? 5 : 5} p={0} m={0} sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important' }}>
                                                                     <Collapse in={isProtocolExpanded} animateOpacity>
-                                                                      <Box py={0} pl={8} bg="#110E22" borderLeft="2px solid" borderColor="#2A2A35">
+                                                                      <Box py={0} bg="#110E22">
                                                                         <Table variant="simple" size="sm">
                                                                           <Thead>
                                                                             <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Wallet Address
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Balance ({asset.token})
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Net APY
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Value (USD)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
@@ -637,17 +670,16 @@ export default function PortfolioSection() {
                                                                               const hasDetails = wallet.details !== undefined
 
                                                                               return (
-                                                                                <>
+                                                                                <React.Fragment key={walletKey}>
                                                                                   <Tr
-                                                                                    key={walletKey}
                                                                                     cursor={hasDetails ? 'pointer' : 'default'}
                                                                                     onClick={() => hasDetails && toggleWalletAddress(walletKey)}
                                                                                     _hover={hasDetails ? { bg: '#2A2641' } : {}}
                                                                                     borderBottom="1px solid"
                                                                                     borderColor="#2A2A35"
                                                                                   >
-                                                                                    <Td h="35px">
-                                                                                      <Flex align="center" gap={2} pl={8}>
+                                                                                    <Td h="45px">
+                                                                                      <Flex align="center" gap={2}>
                                                                                         {hasDetails && (
                                                                                           <Icon
                                                                                             as={isWalletExpanded ? FiChevronDown : FiChevronRight}
@@ -661,19 +693,19 @@ export default function PortfolioSection() {
                                                                                         </Text>
                                                                                       </Flex>
                                                                                     </Td>
-                                                                                    <Td h="35px" isNumeric>{formatNumber(wallet.balance)}</Td>
-                                                                                    <Td h="35px" isNumeric>
+                                                                                    <Td h="45px" isNumeric>{formatNumber(wallet.balance)}</Td>
+                                                                                    <Td h="45px" isNumeric>
                                                                                       <Text color="#3EDD87">{wallet.netApy}%</Text>
                                                                                     </Td>
-                                                                                    <Td h="35px" isNumeric fontWeight="600">
+                                                                                    <Td h="45px" isNumeric fontWeight="600">
                                                                                       {formatNumber(wallet.value)} USD
                                                                                     </Td>
                                                                                   </Tr>
                                                                                   {hasDetails && wallet.details && (
                                                                                     <Tr>
-                                                                                      <Td h="35px" colSpan={4} p={0}>
+                                                                                      <Td h="45px" colSpan={4} p={0}>
                                                                                         <Collapse in={isWalletExpanded} animateOpacity>
-                                                                                          <Box pl={8} pr={4} py={4} bg="#110E22">
+                                                                                          <Box pr={4} py={4} bg="#110E22">
                                                                                             {/* Price Info Box */}
                                                                                             <Box bg="#2A2641" borderRadius="8px" p={4} mb={4}>
                                                                                               <Flex direction="column" gap={2}>
@@ -704,32 +736,32 @@ export default function PortfolioSection() {
                                                                                               <Table variant="simple" size="sm">
                                                                                                 <Thead>
                                                                                                   <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                                      <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Token
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                                                                       <Flex align="center" gap={2}>
                                                                                                         Token Amount
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Balance ({asset.token})
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Supplied APY
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Value (USD)
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
@@ -743,30 +775,33 @@ export default function PortfolioSection() {
                                                                                                       borderBottom="1px solid"
                                                                                                       borderColor="#2A2A35"
                                                                                                     >
-                                                                                                      <Td h="35px">
-                                                                                                        <Flex align="center" gap={2} pl={8}>
+                                                                                                      <Td h="45px">
+                                                                                                        <Flex align="center" gap={2}>
                                                                                                           {(token.token === 'weETH' || token.token === 'wstETH') && (
                                                                                                             <Text fontSize="14px" fontWeight="bold">
                                                                                                               {token.token}
                                                                                                             </Text>
                                                                                                           )}
                                                                                                           {token.token === 'ETH' && (
-                                                                                                            <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
+                                                                                                            <Image src="/images/eth.png" alt="ETH" boxSize={5} />
+                                                                                                          )}
+                                                                                                          {token.token === 'WETH' && (
+                                                                                                            <Image src="/images/WETH.png" alt="WETH" boxSize={5} />
                                                                                                           )}
                                                                                                           <Text>{token.token}</Text>
                                                                                                           <Icon as={FiInfo} boxSize={3} color="gray.400" />
                                                                                                         </Flex>
                                                                                                       </Td>
-                                                                                                      <Td h="35px">{token.tokenAmount}</Td>
-                                                                                                      <Td h="35px" isNumeric fontWeight="bold">
+                                                                                                      <Td h="45px">{token.tokenAmount}</Td>
+                                                                                                      <Td h="45px" isNumeric fontWeight="bold">
                                                                                                         {formatNumber(token.balance)}
                                                                                                       </Td>
-                                                                                                      <Td h="35px" isNumeric>
+                                                                                                      <Td h="45px" isNumeric>
                                                                                                         <Text color="#3EDD87" fontWeight="bold">
                                                                                                           {token.apy}%
                                                                                                         </Text>
                                                                                                       </Td>
-                                                                                                      <Td h="35px" isNumeric fontWeight="bold">
+                                                                                                      <Td h="45px" isNumeric fontWeight="bold">
                                                                                                         {formatNumber(token.value)} USD
                                                                                                       </Td>
                                                                                                     </Tr>
@@ -783,32 +818,32 @@ export default function PortfolioSection() {
                                                                                               <Table variant="simple" size="sm">
                                                                                                 <Thead>
                                                                                                   <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                                      <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Token
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                                                                       <Flex align="center" gap={2}>
                                                                                                         Token Amount
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Balance ({asset.token})
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Borrowed APY
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
                                                                                                     </Th>
-                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                                      <Flex align="center" gap={2} justify="flex-end">
+                                                                                                    <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                                      <Flex align="center" gap={2} justify="flex-start">
                                                                                                         Value (USD)
                                                                                                         <Icon as={FaSort} boxSize={4} color="white" />
                                                                                                       </Flex>
@@ -822,24 +857,27 @@ export default function PortfolioSection() {
                                                                                                       borderBottom="1px solid"
                                                                                                       borderColor="#2A2A35"
                                                                                                     >
-                                                                                                      <Td h="35px">
-                                                                                                        <Flex align="center" gap={2} pl={8}>
+                                                                                                      <Td h="45px">
+                                                                                                        <Flex align="center" gap={2}>
                                                                                                           {token.token === 'ETH' && (
-                                                                                                            <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
+                                                                                                            <Image src="/images/eth.png" alt="ETH" boxSize={5} />
+                                                                                                          )}
+                                                                                                          {token.token === 'WETH' && (
+                                                                                                            <Image src="/images/WETH.png" alt="WETH" boxSize={5} />
                                                                                                           )}
                                                                                                           <Text>{token.token}</Text>
                                                                                                         </Flex>
                                                                                                       </Td>
-                                                                                                      <Td h="35px">{token.tokenAmount}</Td>
-                                                                                                      <Td h="35px" isNumeric fontWeight="bold">
+                                                                                                      <Td h="45px">{token.tokenAmount}</Td>
+                                                                                                      <Td h="45px" isNumeric fontWeight="bold">
                                                                                                         {formatNumber(token.balance)}
                                                                                                       </Td>
-                                                                                                      <Td h="35px" isNumeric>
+                                                                                                      <Td h="45px" isNumeric>
                                                                                                         <Text color="#FFC063" fontWeight="bold">
                                                                                                           {token.apy}%
                                                                                                         </Text>
                                                                                                       </Td>
-                                                                                                      <Td h="35px" isNumeric fontWeight="bold">
+                                                                                                      <Td h="45px" isNumeric fontWeight="bold">
                                                                                                         {formatNumber(token.value)} USD
                                                                                                       </Td>
                                                                                                     </Tr>
@@ -852,7 +890,7 @@ export default function PortfolioSection() {
                                                                                       </Td>
                                                                                     </Tr>
                                                                                   )}
-                                                                                </>
+                                                                                </React.Fragment>
                                                                               )
                                                                             })}
                                                                           </Tbody>
@@ -867,36 +905,36 @@ export default function PortfolioSection() {
                                                                 <Tr>
                                                                   <Td colSpan={5} p={0} m={0} sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important' }}>
                                                                     <Collapse in={isProtocolExpanded} animateOpacity>
-                                                                      <Box py={0} pl={8} bg="#110E22" borderLeft="2px solid" borderColor="#2A2A35">
+                                                                      <Box py={0} bg="#110E22">
                                                                         <Table variant="simple" size="sm">
                                                                           <Thead>
                                                                             <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Token
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                                                 <Flex align="center" gap={2}>
                                                                                   Token Amount
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Balance ({asset.token})
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   APY (%)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Value (USD)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
@@ -910,18 +948,25 @@ export default function PortfolioSection() {
                                                                                 borderBottom="1px solid"
                                                                                 borderColor="#2A2A35"
                                                                               >
-                                                                                <Td h="35px">
-                                                                                  <Text fontSize="14px" fontWeight="bold" pl={8}>{token.token}</Text>
+                                                                                <Td h="45px">
+                                                                                  <Flex align="center" gap={2}>
+                                                                                    {token.token === 'ETH' && <Image src="/images/eth.png" alt="ETH" boxSize={5} />}
+                                                                                    {token.token === 'BTC' && <Image src="/images/btc.png" alt="BTC" boxSize={5} />}
+                                                                                    {token.token === 'WETH' && <Image src="/images/WETH.png" alt="WETH" boxSize={5} />}
+                                                                                    {token.token === 'SOL' && <Image src="/images/sol.png" alt="SOL" boxSize={5} />}
+                                                                                    {token.token === 'USD' && <Image src="/images/usd.png" alt="USD" boxSize={5} />}
+                                                                                    <Text fontSize="14px" fontWeight="bold">{token.token}</Text>
+                                                                                  </Flex>
                                                                                 </Td>
-                                                                                <Td h="35px">{token.tokenAmount}</Td>
-                                                                                <Td h="35px" isNumeric>{formatNumber(token.balance)}</Td>
-                                                                                <Td h="35px" isNumeric>
+                                                                                <Td h="45px">{token.tokenAmount}</Td>
+                                                                                <Td h="45px" isNumeric>{formatNumber(token.balance)}</Td>
+                                                                                <Td h="45px" isNumeric>
                                                                                   <Flex align="center" gap={1}>
                                                                                     {token.apy}%
                                                                                     <Icon as={FiInfo} boxSize={3} color="gray.400" />
                                                                                   </Flex>
                                                                                 </Td>
-                                                                                <Td h="35px" isNumeric fontWeight="600">
+                                                                                <Td h="45px" isNumeric fontWeight="600">
                                                                                   {formatNumber(token.value)} USD
                                                                                 </Td>
                                                                               </Tr>
@@ -938,42 +983,42 @@ export default function PortfolioSection() {
                                                                 <Tr>
                                                                   <Td colSpan={5} p={0} m={0} sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important' }}>
                                                                     <Collapse in={isProtocolExpanded} animateOpacity>
-                                                                      <Box py={0} pl={8} bg="#110E22" borderLeft="2px solid" borderColor="#2A2A35">
+                                                                      <Box py={0} bg="#110E22">
                                                                         <Table variant="simple" size="sm">
                                                                           <Thead>
                                                                             <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="35px">
-                                                                                <Flex align="center" gap={2} pl={8} justify="flex-start">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Token
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                                                 <Flex align="center" gap={2}>
                                                                                   Pool Pair
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="35px">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
                                                                                 <Flex align="center" gap={2}>
                                                                                   Token Amount
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Balance ({asset.token})
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   APY (%)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
                                                                               </Th>
-                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="35px">
-                                                                                <Flex align="center" gap={2} justify="flex-end">
+                                                                              <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric h="45px">
+                                                                                <Flex align="center" gap={2} justify="flex-start">
                                                                                   Value (USD)
                                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                                 </Flex>
@@ -987,25 +1032,26 @@ export default function PortfolioSection() {
                                                                                 borderBottom="1px solid"
                                                                                 borderColor="#2A2A35"
                                                                               >
-                                                                                <Td h="35px">
-                                                                                  <Flex align="center" gap={2} pl={8}>
-                                                                                    {poolPair.token === 'ETH' && <Icon as={FaEthereum} boxSize={5} color="#2268D1" />}
+                                                                                <Td h="45px">
+                                                                                  <Flex align="center" gap={2}>
+                                                                                    {poolPair.token === 'ETH' && <Image src="/images/eth.png" alt="ETH" boxSize={5} />}
+                                                                                    {poolPair.token === 'WETH' && <Image src="/images/WETH.png" alt="WETH" boxSize={5} />}
                                                                                     {(poolPair.token === 'wstETH' || poolPair.token === 'weETH') && (
                                                                                       <Text fontSize="14px" fontWeight="bold">{poolPair.token}</Text>
                                                                                     )}
                                                                                     <Text>{poolPair.token}</Text>
                                                                                   </Flex>
                                                                                 </Td>
-                                                                                <Td h="35px">{poolPair.poolPair}</Td>
-                                                                                <Td h="35px">{poolPair.tokenAmount}</Td>
-                                                                                <Td h="35px" isNumeric>{formatNumber(poolPair.balance)}</Td>
-                                                                                <Td h="35px" isNumeric>
+                                                                                <Td h="45px">{poolPair.poolPair}</Td>
+                                                                                <Td h="45px">{poolPair.tokenAmount}</Td>
+                                                                                <Td h="45px" isNumeric>{formatNumber(poolPair.balance)}</Td>
+                                                                                <Td h="45px" isNumeric>
                                                                                   <Flex align="center" gap={1}>
                                                                                     {poolPair.apy}%
                                                                                     <Icon as={FiInfo} boxSize={3} color="gray.400" />
                                                                                   </Flex>
                                                                                 </Td>
-                                                                                <Td h="35px" isNumeric fontWeight="600">
+                                                                                <Td h="45px" isNumeric fontWeight="600">
                                                                                   {formatNumber(poolPair.value)} USD
                                                                                 </Td>
                                                                               </Tr>
@@ -1017,7 +1063,7 @@ export default function PortfolioSection() {
                                                                   </Td>
                                                                 </Tr>
                                                               )}
-                                                            </>
+                                                            </React.Fragment>
                                                           )
                                                         })}
                                                       </Tbody>
@@ -1037,15 +1083,17 @@ export default function PortfolioSection() {
                           </Td>
                         </Tr>
                       )}
-                    </>
+                    </React.Fragment>
                   )
                 })}
                 <Tr borderTop="1px solid" borderColor="#2A2A35">
-                  <Td fontWeight="bold">TOTAL</Td>
-                  <Td></Td>
-                  <Td></Td>
-                  <Td isNumeric fontWeight="bold">
-                    40,123,456 USD
+                  <Td h="45px" fontWeight="bold">
+                    <Flex pl={28}>TOTAL</Flex>
+                  </Td>
+                  <Td h="45px"></Td>
+                  <Td h="45px"></Td>
+                  <Td h="45px" fontWeight="bold" textAlign="left" pr={10}>
+                    <Flex justify="flex-start" pr={10}>40,123,456 USD</Flex>
                   </Td>
                 </Tr>
               </Tbody>
@@ -1058,24 +1106,24 @@ export default function PortfolioSection() {
           <Text fontSize="18px" fontWeight="bold" mb={4} color="#EE6E6E" pb={2}>
             Total Debts
           </Text>
-          <Box overflowX="auto">
-            <Table variant="simple" size="sm">
+          <Box overflowX="auto" pr={4}>
+            <Table variant="simple" size="sm" width="100%">
               <Thead>
                 <Tr borderBottom="1px solid" borderColor="#2A2A35">
-                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left">
-                    <Flex align="center" gap={2} justify="flex-start">
+                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" textAlign="left" h="45px">
+                    <Flex align="center" gap={2} justify="flex-start" pl={10}>
                       Token
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
                   </Th>
-                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric>
-                    <Flex align="center" gap={2} justify="flex-end">
+                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
+                    <Flex align="center" gap={2} justify="flex-start">
                       Balance
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
                   </Th>
-                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" isNumeric>
-                    <Flex align="center" gap={2} justify="flex-end">
+                  <Th color="white" fontWeight="normal" fontSize="14px" backgroundColor="#1C1833" textTransform="none" h="45px">
+                    <Flex align="center" gap={2} justify="flex-start" pr={10}>
                       Value (USD)
                       <Icon as={FaSort} boxSize={4} color="white" />
                     </Flex>
@@ -1085,33 +1133,28 @@ export default function PortfolioSection() {
               <Tbody>
                 {debts.map((debt) => {
                   const isExpanded = expandedDebts.has(debt.token)
-                  const DebtIcon = getTokenIcon(debt.token)
+                  const debtIconSrc = getTokenIconSrc(debt.token)
 
                   return (
-                    <>
+                    <React.Fragment key={debt.token}>
                       <Tr
-                        key={debt.token}
                         cursor="pointer"
                         onClick={() => toggleDebt(debt.token)}
                         _hover={{ bg: '#2A2641' }}
                         borderBottom="1px solid"
                         borderColor="#2A2A35"
                       >
-                        <Td h="35px">
-                          <Flex align="center" gap={2}>
+                        <Td h="45px">
+                          <Flex align="center" gap={2} pl={10}>
                             <Icon
                               as={isExpanded ? FiChevronDown : FiChevronRight}
                               boxSize={4}
                               color="gray.400"
                             />
-                            {DebtIcon && (
-                              <Icon
-                                as={DebtIcon}
-                                boxSize={5}
-                                color={debt.token === 'ETH' ? '#2268D1' : '#2268D1'}
-                              />
+                            {debtIconSrc && (
+                              <Image src={debtIconSrc} alt={debt.token} boxSize={5} />
                             )}
-                            {!DebtIcon && debt.token === 'USDC' && (
+                            {!debtIconSrc && debt.token === 'USDC' && (
                               <Text fontSize="18px" fontWeight="bold" color="#2268D1">
                                 $USDC
                               </Text>
@@ -1119,27 +1162,33 @@ export default function PortfolioSection() {
                             <Text fontWeight="500">{debt.token}</Text>
                           </Flex>
                         </Td>
-                        <Td h="35px" isNumeric>{formatNumber(debt.balance)}</Td>
-                        <Td h="35px" isNumeric fontWeight="600">
-                          {formatNumber(debt.value)} USD
+                        <Td h="45px">
+                          <Flex justify="flex-start">{formatNumber(debt.balance)}</Flex>
+                        </Td>
+                        <Td h="45px" fontWeight="600">
+                          <Flex justify="flex-start" pr={10}>
+                            {formatNumber(debt.value)} USD
+                          </Flex>
                         </Td>
                       </Tr>
                       {isExpanded && (
                         <Tr>
-                          <Td h="35px" colSpan={3} p={4} color="gray.400" fontSize="14px">
+                          <Td h="45px" colSpan={3} p={4} color="gray.400" fontSize="14px">
                             {/* Additional debt details can be added here */}
                             <Text>Debt details for {debt.token}...</Text>
                           </Td>
                         </Tr>
                       )}
-                    </>
+                    </React.Fragment>
                   )
                 })}
                 <Tr borderTop="1px solid" borderColor="#2A2A35">
-                  <Td fontWeight="bold">TOTAL</Td>
-                  <Td></Td>
-                  <Td isNumeric fontWeight="bold">
-                    98,934 USD
+                  <Td h="45px" fontWeight="bold">
+                    <Flex pl={10}>TOTAL</Flex>
+                  </Td>
+                  <Td h="45px"></Td>
+                  <Td h="45px" fontWeight="bold">
+                    <Flex justify="flex-start" pr={10}>98,934 USD</Flex>
                   </Td>
                 </Tr>
               </Tbody>

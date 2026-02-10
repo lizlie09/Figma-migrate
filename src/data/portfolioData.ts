@@ -74,8 +74,8 @@ export const assets: AssetData[] = [
         percentage: '30.14',
         value: '134,127.19',
         tokens: [
-          { token: 'ETH', balance: '18.5059', value: '80,514.88', networks: [{ network: 'Arbitrum', tokenAmount: '9.6847 ETH', balance: '9.6847', value: '42,136.84' }, { network: 'Ethereum', tokenAmount: '8.8206 ETH', balance: '8.8206', value: '38,378.43' }] },
-          { token: 'WETH', balance: '12.3355', value: '53,612.30', networks: [{ network: 'Arbitrum', tokenAmount: '7.2150 WETH', balance: '7.2150', value: '31,353.20' }, { network: 'Ethereum', tokenAmount: '5.1205 WETH', balance: '5.1205', value: '22,259.10' }] },
+          { token: 'ETH', balance: '18.5059', value: '80,514.88', networks: [{ network: 'Arbitrum', tokenAmount: '9.6847 ETH', balance: '9.6847', value: '42,136.84', walletAddress: '0xb5C9...Adf4' }, { network: 'Ethereum', tokenAmount: '8.8206 ETH', balance: '8.8206', value: '38,378.43', walletAddress: '0xd833...8D10' }] },
+          { token: 'WETH', balance: '12.3355', value: '53,612.30', networks: [{ network: 'Arbitrum', tokenAmount: '7.2150 WETH', balance: '7.2150', value: '31,353.20', walletAddress: '0xb5C9...Adf4' }, { network: 'Ethereum', tokenAmount: '5.1205 WETH', balance: '5.1205', value: '22,259.10', walletAddress: '0xd833...8D10' }] },
         ],
       },
       {
