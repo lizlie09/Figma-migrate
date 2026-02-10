@@ -9,6 +9,7 @@ Your app is a **Vite + React** static site. After you run `npm run build`, the o
 1. **Push your project to GitHub** (if you haven’t already):
    - Create a repo at [github.com/new](https://github.com/new)
    - In your project folder run:
+
    ```bash
    git init
    git add .
@@ -48,19 +49,22 @@ Your app is a **Vite + React** static site. After you run `npm run build`, the o
 1. Push your project to a GitHub repo.
 
 2. In `vite.config.ts`, set the base to your repo name:
+
    ```ts
    export default defineConfig({
      plugins: [react()],
-     base: '/YOUR_REPO_NAME/',
+     base: '/YOUR_REPO_NAME/'
    })
    ```
 
 3. Install the GitHub Pages deploy script:
+
    ```bash
    npm install -D gh-pages
    ```
 
 4. In `package.json`, add:
+
    ```json
    "scripts": {
      "dev": "vite",
@@ -71,6 +75,7 @@ Your app is a **Vite + React** static site. After you run `npm run build`, the o
    ```
 
 5. In the same `package.json`, add:
+
    ```json
    "homepage": "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/"
    ```
@@ -98,10 +103,10 @@ Then open the URL shown in the terminal (e.g. `http://localhost:4173`) to confir
 
 ## Summary
 
-| Service       | Best for              | Free tier | Custom domain |
-|---------------|------------------------|-----------|---------------|
-| **Vercel**    | Easiest, auto deploys  | Yes       | Yes           |
-| **Netlify**   | Similar to Vercel      | Yes       | Yes           |
-| **GitHub Pages** | Already on GitHub   | Yes       | Yes           |
+| Service          | Best for              | Free tier | Custom domain |
+| ---------------- | --------------------- | --------- | ------------- |
+| **Vercel**       | Easiest, auto deploys | Yes       | Yes           |
+| **Netlify**      | Similar to Vercel     | Yes       | Yes           |
+| **GitHub Pages** | Already on GitHub     | Yes       | Yes           |
 
 For most cases, **Vercel** or **Netlify** with a connected GitHub repo is the simplest way to let many people access your app.

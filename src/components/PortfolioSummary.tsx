@@ -12,19 +12,28 @@ export default function PortfolioSummary() {
   return (
     <Box>
       {/* Header */}
-      <Flex justify="space-between" align="center" mb={8}>
-        <Flex align="baseline" gap={3}>
-          <Text fontSize="32px" fontWeight="bold">Portfolio Summary</Text>
-          <Text fontSize="14px" color="gray.400">Ethereum</Text>
+      <Flex justify="space-between" align={{ base: 'flex-start', md: 'center' }} mb={6} gap={3} flexWrap="wrap">
+        <Flex align="baseline" gap={3} flexWrap="wrap">
+          <Text fontSize={{ base: '24px', md: '32px' }} fontWeight="bold">
+            Portfolio Summary
+          </Text>
+          <Text fontSize="14px" color="gray.400">
+            Ethereum
+          </Text>
         </Flex>
         <Flex gap={3}>
-          <Icon as={MdRemoveRedEye} boxSize={5} color="brand.500" cursor="pointer" />
+          <Icon
+            as={MdRemoveRedEye}
+            boxSize={5}
+            color="brand.500"
+            cursor="pointer"
+          />
           <Icon as={FiSettings} boxSize={5} color="gray.400" cursor="pointer" />
         </Flex>
       </Flex>
 
       {/* Stat Cards */}
-      <Grid templateColumns="repeat(3, 1fr)" gap={6} mb={8}>
+      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }} gap={6} mb={6}>
         <StatCard
           title="Total Assets"
           subtitle="All Accounts"
@@ -32,7 +41,7 @@ export default function PortfolioSummary() {
           profit="+$2560.78"
           percentage="+14.67%"
           icon="wallet"
-          iconBg="#3B5998"
+          iconBg="#2268D1"
         />
         <StatCard
           title="Total Debts"
@@ -41,7 +50,7 @@ export default function PortfolioSummary() {
           profit="+$2560.78"
           percentage="+14.67%"
           icon="debt"
-          iconBg="#8B3A62"
+          iconBg="#F46565"
         />
         <StatCard
           title="Net worth"
@@ -50,7 +59,7 @@ export default function PortfolioSummary() {
           profit="+$2560.78"
           percentage="+14.67%"
           icon="trending"
-          iconBg="#2D7A5F"
+          iconBg="#21D6AE"
         />
       </Grid>
 
@@ -58,7 +67,7 @@ export default function PortfolioSummary() {
       <TotalPerformance />
 
       {/* Assets Distribution and Debt Overview */}
-      <Grid templateColumns="repeat(2, 1fr)" gap={6} mb={6} mt={6}>
+      <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }} gap={6} mb={6} mt={0}>
         <AssetsDistribution />
         <DebtOverview />
       </Grid>

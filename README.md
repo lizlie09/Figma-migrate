@@ -5,11 +5,13 @@ A React + Chakra UI implementation of the Crypto Manager dashboard from Figma de
 ## Setup
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Start the development server:
+
 ```bash
 npm run dev
 ```

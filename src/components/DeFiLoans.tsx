@@ -1,5 +1,18 @@
 import React, { useState } from 'react'
-import { Box, Flex, Text, Icon, Table, Thead, Tbody, Tr, Th, Td, Collapse } from '@chakra-ui/react'
+import {
+  Box,
+  Flex,
+  Text,
+  Icon,
+  Image,
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  Collapse
+} from '@chakra-ui/react'
 import { MdAccountBalance } from 'react-icons/md'
 import { FiChevronDown, FiChevronRight, FiChevronUp } from 'react-icons/fi'
 import { FaEthereum } from 'react-icons/fa'
@@ -10,7 +23,7 @@ export default function DeFiLoans() {
 
   const debts = [
     { token: 'USDC', balance: '10500', value: '11,200' },
-    { token: 'ETH', balance: '3.000', value: '87,734' },
+    { token: 'ETH', balance: '3.000', value: '87,734' }
   ]
 
   const toggleDebt = (token: string) => {
@@ -28,37 +41,62 @@ export default function DeFiLoans() {
   }
 
   return (
-    <Box bg="#110E22" borderRadius="12px" p={6}>
+    <Box bg="#110E22" borderRadius="12px" p={{ base: 4, md: 6 }}>
       <Flex justify="space-between" align="center" mb={4}>
         <Flex align="center" gap={3}>
-          <Icon as={MdAccountBalance} boxSize={6} color="#7D67FF" />
-          <Text fontSize="20px" fontWeight="bold">DeFi Loans</Text>
+          <Icon as={MdAccountBalance} boxSize={6} color="white" />
+          <Text fontSize={{ base: '18px', md: '20px' }} fontWeight="bold">
+            DeFi Loans
+          </Text>
         </Flex>
-        <Icon
-          as={isDeFiExpanded ? FiChevronUp : FiChevronDown}
-          boxSize={5}
-          color="gray.400"
+        <Flex
+          w="36px"
+          h="36px"
+          bg="#2A2641"
+          borderRadius="12px"
+          align="center"
+          justify="center"
           cursor="pointer"
+          border="1px solid"
+          borderColor="rgba(255, 255, 255, 0.12)"
           onClick={() => setIsDeFiExpanded(!isDeFiExpanded)}
-        />
+        >
+          <Icon
+            as={isDeFiExpanded ? FiChevronUp : FiChevronDown}
+            boxSize={4}
+            color="white"
+          />
+        </Flex>
       </Flex>
 
-      <Box mt={4} fontSize="14px" mb={4}>
+      <Box mt={4} fontSize={{ base: '14px', md: '18px' }} mb={4}>
         <Flex gap={4} flexWrap="wrap" mb={2}>
           <Text color="gray.400">
-            Total Collateral: <Text as="span" color="#FFC063" fontWeight="600">62,315 USD</Text>
+            Total Collateral:{' '}
+            <Text as="span" color="#FFC063" fontWeight="600">
+              62,315 USD
+            </Text>
           </Text>
-          <Text color="gray.400">|</Text>
+          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>|</Text>
           <Text color="gray.400">
-            Total Debt: <Text as="span" color="#F46565" fontWeight="600">5,147,258.69 USD</Text>
+            Total Debt:{' '}
+            <Text as="span" color="#F46565" fontWeight="600">
+              5,147,258.69 USD
+            </Text>
           </Text>
-          <Text color="gray.400">|</Text>
+          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>|</Text>
           <Text color="gray.400">
-            Total Positions: <Text as="span" color="white" fontWeight="600">3</Text>
+            Total Positions:{' '}
+            <Text as="span" color="white" fontWeight="600">
+              3
+            </Text>
           </Text>
         </Flex>
         <Text color="gray.400">
-          Total Liquidation Threshold: <Text as="span" color="#7D67FF" fontWeight="600">82.50%</Text>
+          Total Liquidation Threshold:{' '}
+          <Text as="span" color="#7D67FF" fontWeight="600">
+            82.50%
+          </Text>
         </Text>
       </Box>
 
@@ -67,13 +105,30 @@ export default function DeFiLoans() {
           <Table variant="simple" size="sm">
             <Thead>
               <Tr>
-                <Th color="gray.400" fontWeight="normal" fontSize="12px" textTransform="none">
+                <Th
+                  color="gray.400"
+                  fontWeight="normal"
+                  fontSize="12px"
+                  textTransform="none"
+                >
                   Token
                 </Th>
-                <Th color="gray.400" fontWeight="normal" fontSize="12px" textTransform="none" isNumeric>
+                <Th
+                  color="gray.400"
+                  fontWeight="normal"
+                  fontSize="12px"
+                  textTransform="none"
+                  isNumeric
+                >
                   Balance
                 </Th>
-                <Th color="gray.400" fontWeight="normal" fontSize="12px" textTransform="none" isNumeric>
+                <Th
+                  color="gray.400"
+                  fontWeight="normal"
+                  fontSize="12px"
+                  textTransform="none"
+                  isNumeric
+                >
                   Value (USD)
                 </Th>
               </Tr>
@@ -87,7 +142,7 @@ export default function DeFiLoans() {
                     <Tr
                       cursor="pointer"
                       onClick={() => toggleDebt(debt.token)}
-                        _hover={{ bg: '#2A2641' }}
+                      _hover={{ bg: '#2A2641' }}
                     >
                       <Td>
                         <Flex align="center" gap={2}>
@@ -96,11 +151,11 @@ export default function DeFiLoans() {
                             boxSize={4}
                             color="gray.400"
                           />
-                          {debt.token === 'ETH' && <Icon as={FaEthereum} boxSize={5} color="#2268D1" />}
+                          {debt.token === 'ETH' && (
+                            <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
+                          )}
                           {debt.token === 'USDC' && (
-                            <Text fontSize="18px" fontWeight="bold" color="#2268D1">
-                              $USDC
-                            </Text>
+                            <Image src="/images/usdc.png" alt="USDC" boxSize={5} />
                           )}
                           <Text fontWeight="500">{debt.token}</Text>
                         </Flex>
