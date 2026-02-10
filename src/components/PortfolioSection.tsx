@@ -294,56 +294,78 @@ export default function PortfolioSection() {
                                                       <Thead>
                                                         <Tr borderBottom="1px solid" borderColor="#2A2A35">
                                                           <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
-                                                            <Flex align="center" gap={2} justify="flex-start" pl={48}>
+                                                            <Flex align="center" gap={2} justify="flex-start" pl={48} fontWeight={"bold"}>
                                                               Token
                                                               <Icon as={FaSort} boxSize={4} color="white" />
                                                             </Flex>
                                                           </Th>
                                                           {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && (
                                                             <>
-                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2}>
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" sx={{ whiteSpace: 'nowrap' }}>
+                                                                <Flex align="center" gap={2} fontWeight={"bold"}>
                                                                   Token Amount
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
-                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2} justify="flex-start">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" sx={{ whiteSpace: 'nowrap' }}>
+                                                                <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"}>
                                                                   Balance ({asset.token})
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
-                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833">
-                                                                <Flex align="center" gap={2} justify="flex-start">
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" isNumeric backgroundColor="#1C1833" sx={{ whiteSpace: 'nowrap' }}>
+                                                                <Flex align="center" gap={2} justify="flex-start" fontWeight={"bold"}>
                                                                   APY (%)
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
-                                                            </>
-                                                          )}
-                                                          {positionType.positionType === 'Wallet Balance' && (
-                                                            <>
-                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
-                                                                <Flex align="center" gap={2} justify="flex-start" pl={20}>
-                                                                  Balance ({asset.token})
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" sx={{ whiteSpace: 'nowrap' }}>
+                                                                <Flex align="center" gap={2} justify="flex-start" pl={2} fontWeight={"bold"}>
+                                                                  Value (USD)
                                                                   <Icon as={FaSort} boxSize={4} color="white" />
                                                                 </Flex>
                                                               </Th>
                                                             </>
                                                           )}
-                                                          <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left" >
-                                                            <Flex align="center" gap={2} justify="flex-start" pl={44} >
-                                                              Value (USD)
-                                                              <Icon as={FaSort} boxSize={4} color="white" />
-                                                            </Flex>
-                                                          </Th>
+
+                                                          {positionType.positionType === 'Wallet Balance' && (
+                                                            <>
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left">
+                                                                <Flex align="center" gap={2} justify="flex-start" pl={20} fontWeight={"bold"}>
+                                                                  Balance ({asset.token})
+                                                                  <Icon as={FaSort} boxSize={4} color="white" />
+                                                                </Flex>
+                                                              </Th>
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left">
+                                                                <Flex align="center" gap={2} justify="flex-start" pl={44} fontWeight={"bold"}>
+                                                                  Value (USD)
+                                                                  <Icon as={FaSort} boxSize={4} color="white" />
+                                                                </Flex>
+                                                              </Th>
+                                                            </>
+                                                          )}
+
+                                                          {positionType.positionType !== 'Wallet Balance' &&
+                                                            positionType.positionType !== 'Staking' &&
+                                                            positionType.positionType !== 'Staking & Wrapped' && (
+                                                              <Th h="45px" color="white" fontWeight="normal" fontSize="14px" textTransform="none" backgroundColor="#1C1833" textAlign="left">
+                                                                <Flex align="center" gap={2} justify="flex-start" pl={44}>
+                                                                  Value (USD)
+                                                                  <Icon as={FaSort} boxSize={4} color="white" />
+                                                                </Flex>
+                                                              </Th>
+                                                            )}
                                                         </Tr>
                                                       </Thead>
                                                       <Tbody>
-                                                        {positionType.tokens?.map((token) => {
-                                                          const tokenKey = `${positionKey}-${token.token}`
+                                                        {positionType.tokens?.map((token, tokenIndex) => {
+                                                          const tokenKey = `${positionKey}-${token.token}-${tokenIndex}`
                                                           const isTokenExpanded = expandedTokens.has(tokenKey)
                                                           const hasNetworks = token.networks && token.networks.length > 0
+                                                          const isStakingPosition = positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped'
+                                                          const isWalletBalancePosition = positionType.positionType === 'Wallet Balance'
+                                                          const balanceCellPadding = isWalletBalancePosition ? 20 : isStakingPosition ? 0 : 20
+                                                          const valueCellPadding = isWalletBalancePosition ? 44 : isStakingPosition ? 2 : 44
 
                                                           return (
                                                             <React.Fragment key={tokenKey}>
@@ -372,42 +394,89 @@ export default function PortfolioSection() {
                                                                     {token.token === 'WETH' && (
                                                                       <Image src="/images/WETH.png" alt="WETH" boxSize={5} />
                                                                     )}
-                                                                    {(token.token === 'wstETH' || token.token === 'rETH' || token.token === 'weETH' || token.token === 'cbETH' || token.token === 'aETH' || token.token === 'cbBTC' || token.token === 'wBTC' || token.token === 'WBTC' || token.token === 'LBTC' || token.token === 'eBTC' || token.token === 'tBTC') && (
-                                                                      <Text fontSize="14px" fontWeight="bold">
-                                                                        {token.token}
-                                                                      </Text>
+                                                                    {token.token === 'wstETH' && (
+                                                                      <Image src="/images/wstETH.png" alt="wstETH" boxSize={5} />
                                                                     )}
-                                                                    {token.token === 'MATIC' && (
-                                                                      <Text fontSize="14px" fontWeight="bold">
-                                                                        MATIC
-                                                                      </Text>
+                                                                    {token.token === 'rETH' && (
+                                                                      <Image src="/images/rETH.png" alt="rETH" boxSize={5} />
                                                                     )}
-                                                                    <Text>{token.token}</Text>
+                                                                    {token.token === 'weETH' && (
+                                                                      <Image src="/images/weETH.png" alt="weETH" boxSize={5} />
+                                                                    )}
+                                                                    <Text
+                                                                      fontSize="14px"
+                                                                      fontWeight={
+                                                                        token.token === 'wstETH' ||
+                                                                        token.token === 'rETH' ||
+                                                                        token.token === 'weETH' ||
+                                                                        token.token === 'cbETH' ||
+                                                                        token.token === 'aETH' ||
+                                                                        token.token === 'cbBTC' ||
+                                                                        token.token === 'wBTC' ||
+                                                                        token.token === 'WBTC' ||
+                                                                        token.token === 'LBTC' ||
+                                                                        token.token === 'eBTC' ||
+                                                                        token.token === 'tBTC' ||
+                                                                        token.token === 'MATIC'
+                                                                          ? 'bold'
+                                                                          : 'normal'
+                                                                      }
+                                                                    >
+                                                                      {token.token}
+                                                                    </Text>
                                                                   </Flex>
                                                                 </Td>
-                                                                {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && token.tokenAmount && (
-                                                                  <Td h="45px">{token.tokenAmount}</Td>
-                                                                )}
-                                                                <Td h="45px" textAlign="left">
-                                                                  <Flex justify="flex-start" pl={20}>{formatNumber(token.balance)}</Flex>
-                                                                </Td>
-                                                                {(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') && token.apy && (
+                                                                {isStakingPosition && token.tokenAmount && (
                                                                   <Td h="45px">
-                                                                    <Flex align="center" gap={1} justify="flex-start">
-                                                                      {token.apy}%
-                                                                      <Icon as={FiInfo} boxSize={3} color="gray.400" />
-                                                                    </Flex>
+                                                                    <Flex align="center" gap={3} justify="flex-start" >{token.tokenAmount}</Flex>
                                                                   </Td>
                                                                 )}
+                                                                <Td
+                                                                  h="45px"
+                                                                  textAlign="left"
+                                                                 >
+                                                                  <Flex justify="flex-start" pl={balanceCellPadding}>{formatNumber(token.balance)}</Flex>
+                                                                </Td>
+                                                                {isStakingPosition && token.apy && (
+                                                                  <Td h="45px">
+                                                                    <Flex align="center" gap={3} justify="flex-start">
+                                                                      {token.apy}%
+                                                                      <Tooltip
+                                                                        placement="left"
+                                                                        hasArrow
+                                                                        arrowShadowColor="#8A63D2"
+                                                                        bg="#26214B"
+                                                                        color="white"
+                                                                        border="1px solid"
+                                                                        borderColor="#8A63D2"
+                                                                        borderRadius="8px"
+                                                                        px={2}
+                                                                        py={1.5}
+                                                                        label={
+                                                                          <Box>
+                                                                            <Text fontWeight="bold" fontSize="11px" mb={0.5}>
+                                                                              Staking APR
+                                                                            </Text>
+                                                                            <Text fontSize="11px" textDecoration="underline">
+                                                                              {token.apy}%
+                                                                            </Text>
+                                                                          </Box>
+                                                                        }
+                                                                      >
+                                                                        <Box as="span" cursor="help" display="inline-flex">
+                                                                          <Icon as={FiInfo} boxSize={4} color="#FFFFFF" _hover={{ color: 'gray.300' }} />
+                                                                        </Box>
+                                                                      </Tooltip>
+                                                                    </Flex>
+                                                                  </Td>
+                                                                )} 
                                                                 <Td h="45px" textAlign="left" >
-                                                                  <Flex justify="flex-start" pl={44}>
-                                                                    {formatNumber(token.value)}
-                                                                  </Flex>
+                                                                  <Flex justify="flex-start" pl={valueCellPadding}>{formatNumber(token.value)}</Flex>
                                                                 </Td>
                                                               </Tr>
                                                               {hasNetworks && (
                                                                 <Tr sx={{ verticalAlign: 'top' }}>
-                                                                  <Td colSpan={(positionType.positionType === 'Staking' || positionType.positionType === 'Staking & Wrapped') ? 5 : 3} p={0} m={0} verticalAlign="top" sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important', lineHeight: 0 }}>
+                                                                  <Td colSpan={isStakingPosition ? 5 : 3} p={0} m={0} verticalAlign="top" sx={{ padding: '0 !important', margin: '0 !important', borderBottom: 'none !important', lineHeight: 0 }}>
                                                                     <Collapse in={isTokenExpanded} animateOpacity>
                                                                       <Box py={0} m={0} bg="#110E22" sx={{ lineHeight: 'normal' }}>
                                                                         <Table variant="simple" size="sm" sx={{ borderSpacing: 0, borderCollapse: 'collapse' }}>
@@ -470,7 +539,7 @@ export default function PortfolioSection() {
                                                                                 </Td>
                                                                                 <Td h="45px" textAlign="left">
                                                                                   <Flex align="center" gap={3} justify="flex-start" pl={10}>
-                                                                                    {formatNumber(network.value)} USD
+                                                                                    {formatNumber(network.value)}
                                                                                     <Tooltip
                                                                                       placement="left"
                                                                                       hasArrow
