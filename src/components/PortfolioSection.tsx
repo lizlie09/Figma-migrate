@@ -2229,10 +2229,10 @@ animateOpacity
                                                         >
                                                           <Flex w="100%" justify="space-between" gap={4}>
                                                             <Box flex="1" minW={0}>
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Token
                                                               </Text>
-                                                              <Flex align="center" gap={2}>
+                                                              <Flex align="center" gap={2} pl={4}>
                                                                 {tokenIconSrc && (
                                                                   <Image
                                                                     src={tokenIconSrc}
@@ -2251,33 +2251,33 @@ animateOpacity
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Token Amount
                                                               </Text>
-                                                              <Text fontWeight="600">{token.tokenAmount}</Text>
+                                                              <Text fontWeight="600" pl={4}>{token.tokenAmount}</Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Balance ({asset.token})
                                                               </Text>
-                                                              <Text fontWeight="bold">{formatNumber(token.balance)}</Text>
+                                                              <Text fontWeight="bold" pl={4}>{formatNumber(token.balance)}</Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Supplied APY
                                                               </Text>
-                                                              <Text color="#4CAF50" fontWeight="bold">
+                                                              <Text color="#4CAF50" fontWeight="bold" pl={4}>
                                                                 {token.apy}%
                                                               </Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Value (USD)
                                                               </Text>
-                                                              <Text fontWeight="bold">{formatNumber(token.value)}</Text>
+                                                              <Text fontWeight="bold" pl={4}>{formatNumber(token.value)}</Text>
                                                             </Box>
                                                           </Flex>
                                                         </Box>
@@ -2304,10 +2304,10 @@ animateOpacity
                                                         >
                                                           <Flex w="100%" justify="space-between" gap={4}>
                                                             <Box flex="1" minW={0}>
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Token
                                                               </Text>
-                                                              <Flex align="center" gap={2}>
+                                                              <Flex align="center" gap={2} pl={4}>
                                                                 {tokenIconSrc && (
                                                                   <Image
                                                                     src={tokenIconSrc}
@@ -2320,33 +2320,33 @@ animateOpacity
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Token Amount
                                                               </Text>
-                                                              <Text fontWeight="600">{token.tokenAmount}</Text>
+                                                              <Text fontWeight="600" pl={4}>{token.tokenAmount}</Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Balance ({asset.token})
                                                               </Text>
-                                                              <Text fontWeight="bold">{formatNumber(token.balance)}</Text>
+                                                              <Text fontWeight="bold" pl={4}>{formatNumber(token.balance)}</Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Borrowed APY
                                                               </Text>
-                                                              <Text color="#FF9800" fontWeight="bold">
+                                                              <Text color="#FF9800" fontWeight="bold" pl={4}>
                                                                 {token.apy}%
                                                               </Text>
                                                             </Box>
 
                                                             <Box flex="1" minW={0} textAlign="left">
-                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1}>
+                                                              <Text color="rgba(255, 255, 255, 0.5)" fontSize="14px" mb={1} pl={4}>
                                                                 Value (USD)
                                                               </Text>
-                                                              <Text fontWeight="bold">{formatNumber(token.value)}</Text>
+                                                              <Text fontWeight="bold" pl={4}>{formatNumber(token.value)}</Text>
                                                             </Box>
                                                           </Flex>
                                                         </Box>
