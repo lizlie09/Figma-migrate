@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -11,34 +11,34 @@ import {
   Tr,
   Th,
   Td,
-  Collapse
-} from '@chakra-ui/react'
-import { MdAccountBalance } from 'react-icons/md'
-import { FiChevronDown, FiChevronRight, FiChevronUp } from 'react-icons/fi'
-import { FaEthereum } from 'react-icons/fa'
+  Collapse,
+} from '@chakra-ui/react';
+import { MdAccountBalance } from 'react-icons/md';
+import { FiChevronDown, FiChevronRight, FiChevronUp } from 'react-icons/fi';
+import { FaEthereum } from 'react-icons/fa';
 
 export default function DeFiLoans() {
-  const [isDeFiExpanded, setIsDeFiExpanded] = useState(false)
-  const [expandedDebts, setExpandedDebts] = useState<Set<string>>(new Set())
+  const [isDeFiExpanded, setIsDeFiExpanded] = useState(false);
+  const [expandedDebts, setExpandedDebts] = useState<Set<string>>(new Set());
 
   const debts = [
     { token: 'USDC', balance: '10500', value: '11,200' },
-    { token: 'ETH', balance: '3.000', value: '87,734' }
-  ]
+    { token: 'ETH', balance: '3.000', value: '87,734' },
+  ];
 
   const toggleDebt = (token: string) => {
-    const newExpanded = new Set(expandedDebts)
+    const newExpanded = new Set(expandedDebts);
     if (newExpanded.has(token)) {
-      newExpanded.delete(token)
+      newExpanded.delete(token);
     } else {
-      newExpanded.add(token)
+      newExpanded.add(token);
     }
-    setExpandedDebts(newExpanded)
-  }
+    setExpandedDebts(newExpanded);
+  };
 
   const formatNumber = (num: string) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  };
 
   return (
     <Box bg="#110E22" borderRadius="12px" p={{ base: 4, md: 6 }}>
@@ -77,14 +77,18 @@ export default function DeFiLoans() {
               62,315 USD
             </Text>
           </Text>
-          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>|</Text>
+          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>
+            |
+          </Text>
           <Text color="gray.400">
             Total Debt:{' '}
             <Text as="span" color="#F46565" fontWeight="600">
               5,147,258.69 USD
             </Text>
           </Text>
-          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>|</Text>
+          <Text color="gray.400" display={{ base: 'none', md: 'block' }}>
+            |
+          </Text>
           <Text color="gray.400">
             Total Positions:{' '}
             <Text as="span" color="white" fontWeight="600">
@@ -135,7 +139,7 @@ export default function DeFiLoans() {
             </Thead>
             <Tbody>
               {debts.map((debt) => {
-                const isExpanded = expandedDebts.has(debt.token)
+                const isExpanded = expandedDebts.has(debt.token);
 
                 return (
                   <React.Fragment key={debt.token}>
@@ -149,13 +153,17 @@ export default function DeFiLoans() {
                           <Icon
                             as={isExpanded ? FiChevronDown : FiChevronRight}
                             boxSize={4}
-                            color="gray.400"
+                            color="white"
                           />
                           {debt.token === 'ETH' && (
                             <Icon as={FaEthereum} boxSize={5} color="#2268D1" />
                           )}
                           {debt.token === 'USDC' && (
-                            <Image src="/images/usdc.png" alt="USDC" boxSize={5} />
+                            <Image
+                              src="/images/usdc.png"
+                              alt="USDC"
+                              boxSize={5}
+                            />
                           )}
                           <Text fontWeight="500">{debt.token}</Text>
                         </Flex>
@@ -174,7 +182,7 @@ export default function DeFiLoans() {
                       </Tr>
                     )}
                   </React.Fragment>
-                )
+                );
               })}
               <Tr borderTop="1px solid" borderColor="gray.700">
                 <Td fontWeight="bold">TOTAL</Td>
@@ -188,5 +196,5 @@ export default function DeFiLoans() {
         </Box>
       </Collapse>
     </Box>
-  )
+  );
 }

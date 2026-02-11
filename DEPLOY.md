@@ -53,8 +53,8 @@ Your app is a **Vite + React** static site. After you run `npm run build`, the o
    ```ts
    export default defineConfig({
      plugins: [react()],
-     base: '/YOUR_REPO_NAME/'
-   })
+     base: '/YOUR_REPO_NAME/',
+   });
    ```
 
 3. Install the GitHub Pages deploy script:

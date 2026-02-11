@@ -1,13 +1,6 @@
-import {
-  Box,
-  Flex,
-  Text,
-  Icon,
-  Button,
-  Grid
-} from '@chakra-ui/react'
-import { MdAreaChart } from 'react-icons/md'
-import { FiCalendar } from 'react-icons/fi'
+import { Box, Flex, Text, Icon, Button, Grid } from '@chakra-ui/react';
+import { MdAreaChart } from 'react-icons/md';
+import { FiCalendar } from 'react-icons/fi';
 import {
   XAxis,
   YAxis,
@@ -15,9 +8,9 @@ import {
   Tooltip,
   ResponsiveContainer,
   Area,
-  AreaChart
-} from 'recharts'
-import CryptoPerformanceCard from './CryptoPerformanceCard'
+  AreaChart,
+} from 'recharts';
+import CryptoPerformanceCard from './CryptoPerformanceCard';
 
 const data = [
   { month: 'May', value: 300000 },
@@ -31,8 +24,8 @@ const data = [
   { month: 'Jan', value: 7800000 },
   { month: 'Feb', value: 8600000 },
   { month: 'Mar', value: 10200000 },
-  { month: 'Apr', value: 14000000 }
-]
+  { month: 'Apr', value: 14000000 },
+];
 
 export default function TotalPerformance() {
   return (
@@ -41,7 +34,7 @@ export default function TotalPerformance() {
         base: '1fr',
         lg: 'minmax(0, 1fr) 280px',
         xl: 'minmax(0, 1fr) 300px',
-        '2xl': 'minmax(0, 1fr) 330px'
+        '2xl': 'minmax(0, 1fr) 330px',
       }}
       gap={6}
       mb={6}
@@ -57,7 +50,11 @@ export default function TotalPerformance() {
         <Box mb={2}>
           <Flex align="center" gap={3} mb={2}>
             <Icon as={MdAreaChart} boxSize={6} />
-            <Text fontSize={{ base: '18px', md: '20px' }} fontWeight="bold" whiteSpace="nowrap">
+            <Text
+              fontSize={{ base: '18px', md: '20px' }}
+              fontWeight="bold"
+              whiteSpace="nowrap"
+            >
               Total Performance
             </Text>
           </Flex>
@@ -98,7 +95,10 @@ export default function TotalPerformance() {
                   px={3}
                   variant="ghost"
                   color="rgba(255, 255, 255, 0.5)"
-                  _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                  _hover={{
+                    bg: 'transparent',
+                    color: 'rgba(255, 255, 255, 0.7)',
+                  }}
                   borderRadius="6px"
                   fontWeight="600"
                 >
@@ -122,7 +122,10 @@ export default function TotalPerformance() {
                 px={2.5}
                 variant="ghost"
                 color="rgba(255, 255, 255, 0.5)"
-                _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                _hover={{
+                  bg: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
                 borderRadius="6px"
                 fontWeight="600"
               >
@@ -146,7 +149,10 @@ export default function TotalPerformance() {
                 px={2.5}
                 variant="ghost"
                 color="rgba(255, 255, 255, 0.5)"
-                _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                _hover={{
+                  bg: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
                 borderRadius="6px"
                 fontWeight="600"
               >
@@ -158,7 +164,10 @@ export default function TotalPerformance() {
                 px={2.5}
                 variant="ghost"
                 color="rgba(255, 255, 255, 0.5)"
-                _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                _hover={{
+                  bg: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
                 borderRadius="6px"
                 fontWeight="600"
               >
@@ -170,7 +179,10 @@ export default function TotalPerformance() {
                 px={2.5}
                 variant="ghost"
                 color="rgba(255, 255, 255, 0.5)"
-                _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                _hover={{
+                  bg: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
                 borderRadius="6px"
                 fontWeight="600"
               >
@@ -182,13 +194,21 @@ export default function TotalPerformance() {
                 px={2.5}
                 variant="ghost"
                 color="rgba(255, 255, 255, 0.5)"
-                _hover={{ bg: 'transparent', color: 'rgba(255, 255, 255, 0.7)' }}
+                _hover={{
+                  bg: 'transparent',
+                  color: 'rgba(255, 255, 255, 0.7)',
+                }}
                 borderRadius="6px"
                 fontWeight="600"
               >
                 MAX
               </Button>
-              <Icon as={FiCalendar} boxSize={4} color="rgba(255, 255, 255, 0.5)" mx={1} />
+              <Icon
+                as={FiCalendar}
+                boxSize={4}
+                color="rgba(255, 255, 255, 0.5)"
+                mx={1}
+              />
             </Flex>
           </Flex>
         </Box>
@@ -219,11 +239,11 @@ export default function TotalPerformance() {
                 contentStyle={{
                   backgroundColor: '#1C1833',
                   border: '1px solid #2A2641',
-                  borderRadius: '8px'
+                  borderRadius: '8px',
                 }}
                 formatter={(value: number) => [
                   `$${(value / 1000000).toFixed(1)}M`,
-                  'Value'
+                  'Value',
                 ]}
               />
               <Area
@@ -266,5 +286,5 @@ export default function TotalPerformance() {
         />
       </Flex>
     </Grid>
-  )
+  );
 }

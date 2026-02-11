@@ -1,12 +1,12 @@
-import { Box, Flex, Text, Icon } from '@chakra-ui/react'
-import { MdPieChart } from 'react-icons/md'
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts'
+import { Box, Flex, Text, Icon } from '@chakra-ui/react';
+import { MdPieChart } from 'react-icons/md';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const data = [
   { name: 'BTC', value: 48, color: '#FFC063' },
   { name: 'ETH', value: 33, color: '#7D67FF' },
-  { name: 'SOL', value: 20, color: '#3EDD87' }
-]
+  { name: 'SOL', value: 20, color: '#3EDD87' },
+];
 
 export default function AssetsDistribution() {
   return (
@@ -49,7 +49,13 @@ export default function AssetsDistribution() {
 
         <Box w={{ base: '100%', md: 'auto' }}>
           {data.map((item) => (
-            <Flex key={item.name} align="center" gap={2} mb={3} justify={{ base: 'center', md: 'flex-start' }}>
+            <Flex
+              key={item.name}
+              align="center"
+              gap={2}
+              mb={3}
+              justify={{ base: 'center', md: 'flex-start' }}
+            >
               <Box w="12px" h="12px" borderRadius="full" bg={item.color} />
               <Text fontSize="14px">
                 <Text as="span" fontWeight="600">
@@ -64,5 +70,5 @@ export default function AssetsDistribution() {
         </Box>
       </Flex>
     </Box>
-  )
+  );
 }

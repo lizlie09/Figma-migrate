@@ -1,15 +1,15 @@
-import { Box, Icon, Tooltip } from '@chakra-ui/react'
-import { FiInfo } from 'react-icons/fi'
-import type { ReactNode } from 'react'
+import { Box, Icon, Tooltip } from '@chakra-ui/react';
+import { FiInfo } from 'react-icons/fi';
+import type { ReactNode } from 'react';
 
 interface InfoTooltipIconProps {
-  label: ReactNode
-  placement?: 'left' | 'right' | 'top' | 'bottom'
+  label: ReactNode;
+  placement?: 'left' | 'right' | 'top' | 'bottom';
 }
 
 export default function InfoTooltipIcon({
   label,
-  placement = 'left'
+  placement = 'left',
 }: InfoTooltipIconProps) {
   return (
     <Tooltip
@@ -26,8 +26,13 @@ export default function InfoTooltipIcon({
       label={label}
     >
       <Box as="span" cursor="help" display="inline-flex">
-        <Icon as={FiInfo} boxSize={4} color="#FFFFFF" _hover={{ color: 'gray.300' }} />
+        <Icon
+          as={FiInfo}
+          boxSize={4}
+          color="#FFFFFF"
+          _hover={{ color: 'gray.300' }}
+        />
       </Box>
     </Tooltip>
-  )
+  );
 }

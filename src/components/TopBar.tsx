@@ -8,14 +8,14 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  Button
-} from '@chakra-ui/react'
-import { MdNotifications } from 'react-icons/md'
-import { FiChevronDown } from 'react-icons/fi'
-import { useState } from 'react'
+  Button,
+} from '@chakra-ui/react';
+import { MdNotifications } from 'react-icons/md';
+import { FiChevronDown } from 'react-icons/fi';
+import { useState } from 'react';
 
 export default function TopBar() {
-  const [currency, setCurrency] = useState('USD')
+  const [currency, setCurrency] = useState('USD');
 
   return (
     <Flex
@@ -28,7 +28,13 @@ export default function TopBar() {
       // borderBottom="1px solid"
       // borderColor="#2A2641"
     >
-      <Flex align="center" gap={{ base: 2, md: 4 }} w="100%" justify="flex-end" flexWrap="wrap">
+      <Flex
+        align="center"
+        gap={{ base: 2, md: 4 }}
+        w="100%"
+        justify="flex-end"
+        flexWrap="wrap"
+      >
         <Menu placement="bottom-start">
           <MenuButton
             as={Button}
@@ -48,10 +54,14 @@ export default function TopBar() {
           >
             {currency}
           </MenuButton>
-          <MenuList bg="#1C1833" borderColor="#2A2641" minW={{ base: '88px', md: '100px' }}>
+          <MenuList
+            bg="#1C1833"
+            borderColor="#2A2641"
+            minW={{ base: '88px', md: '100px' }}
+          >
             {['BTC', 'ETH', 'USD'].map((item) => (
               <MenuItem
-              color="white"
+                color="white"
                 key={item}
                 bg="transparent"
                 _hover={{ bg: '#2A2641' }}
@@ -89,5 +99,5 @@ export default function TopBar() {
         <Avatar size="sm" bg="cyan.400" name="User" cursor="pointer" />
       </Flex>
     </Flex>
-  )
+  );
 }

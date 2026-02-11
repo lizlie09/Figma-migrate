@@ -1,5 +1,5 @@
-import { Box, Flex, Text, Icon } from '@chakra-ui/react'
-import { MdBarChart } from 'react-icons/md'
+import { Box, Flex, Text, Icon } from '@chakra-ui/react';
+import { MdBarChart } from 'react-icons/md';
 import {
   BarChart,
   Bar,
@@ -8,14 +8,14 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  Cell
-} from 'recharts'
+  Cell,
+} from 'recharts';
 
 const data = [
   { name: 'Total Assets', value: 40000000, color: '#3EDD87' },
   { name: 'Total Collateral', value: 20000000, color: '#FFC063' },
-  { name: 'Total Debt', value: 8000000, color: '#F46565' }
-]
+  { name: 'Total Debt', value: 8000000, color: '#F46565' },
+];
 
 export default function DebtOverview() {
   return (
@@ -47,11 +47,11 @@ export default function DebtOverview() {
               contentStyle={{
                 backgroundColor: '#1C1833',
                 border: '1px solid #2A2641',
-                borderRadius: '8px'
+                borderRadius: '8px',
               }}
               formatter={(value: number) => [
                 `$${(value / 1000000).toFixed(1)}M`,
-                ''
+                '',
               ]}
             />
             <Bar dataKey="value" fill="#8884d8" radius={[8, 8, 0, 0]}>
@@ -63,5 +63,5 @@ export default function DebtOverview() {
         </ResponsiveContainer>
       </Box>
     </Box>
-  )
+  );
 }

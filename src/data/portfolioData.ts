@@ -1,4 +1,4 @@
-import type { AssetData } from '../types/portfolio'
+import type { AssetData } from '../types/portfolio';
 
 export const assets: AssetData[] = [
   {
@@ -9,263 +9,273 @@ export const assets: AssetData[] = [
     positionTypes: [
       {
         positionType: 'Staking & Wrapped',
-        balance: '7.66565',
+        balance: '7.6656',
         percentage: '22.22',
-        value: '967,904.95',
+        value: '967,904',
         tokens: [
           {
             token: 'cbBTC',
-            tokenAmount: '1.90388 cbBTC',
-            balance: '1.90388',
-            value: '240,393.70'
-          },
-          {
-            token: 'wBTC',
-            tokenAmount: '2.00427 wBTC',
-            balance: '2.00427',
-            value: '253,046.00',
+            tokenAmount: '1.9038 cbBTC',
+            balance: '1.9038',
+            apy: 'No APY',
+            value: '240,393',
             networks: [
               {
                 network: 'Ethereum',
-                tokenAmount: '2.00427 WBTC',
-                balance: '2.00427',
-                value: '253,046.00'
-              }
-            ]
+                tokenAmount: '1.9038 cbBTC',
+                balance: '1.9038',
+                value: '240,393',
+              },
+            ],
+          },
+          {
+            token: 'WBTC',
+            tokenAmount: '2.0042 WBTC',
+            balance: '2.0042',
+            apy: 'No APY',
+            value: '253,046',
+            networks: [
+              {
+                network: 'Ethereum',
+                tokenAmount: '2.0042 WBTC',
+                balance: '2.0042',
+                value: '253,046',
+              },
+            ],
           },
           {
             token: 'LBTC',
-            tokenAmount: '3.15374 LBTC',
-            balance: '3.16075',
+            tokenAmount: '3.1537 LBTC',
+            balance: '3.1607',
             apy: '0.41',
-            value: '240,393.70',
+            value: '240,393',
             networks: [
               {
                 network: 'Ethereum',
-                tokenAmount: '1.73960 LBTC',
-                balance: '1.74471',
-                value: '132,207.40'
+                tokenAmount: '1.7396 LBTC',
+                balance: '1.7447',
+                value: '132,207',
               },
               {
                 network: 'Arbitrum',
-                tokenAmount: '1.41414 LBTC',
-                balance: '1.41604',
-                value: '108,186.30'
-              }
-            ]
+                tokenAmount: '1.4141 LBTC',
+                balance: '1.4160',
+                value: '108,186',
+              },
+            ],
           },
           {
             token: 'eBTC',
-            tokenAmount: '1.85362 eBTC',
-            balance: '1.85699',
+            tokenAmount: '1.8536 eBTC',
+            balance: '1.8569',
             apy: '0.40',
-            value: '234,071.55',
+            value: '234,071',
             networks: [
               {
                 network: 'Ethereum',
                 tokenAmount: '1.85362 eBTC',
-                balance: '1.85699',
-                value: '234,071.55'
-              }
-            ]
-          }
-        ]
+                balance: '1.8569',
+                value: '234,071',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Wallet Balance',
-        balance: '7.50831',
+        balance: '7.5083',
         percentage: '36.11',
-        value: '948,922.50',
+        value: '948,922',
         tokens: [
           {
             token: 'BTC',
-            balance: '3.50756',
-            value: '442,830.50',
+            balance: '3.5075',
+            value: '442,830',
             networks: [
               {
                 network: 'Ethereum',
-                tokenAmount: '3.50756 BTC',
-                balance: '3.50756',
-                value: '442,830.50'
-              }
-            ]
+                tokenAmount: '3.5075 BTC',
+                balance: '3.5075',
+                value: '442,830',
+              },
+            ],
           },
           {
             token: 'BTC',
-            balance: '2.24652',
-            value: '284,676.75',
+            balance: '2.2465',
+            value: '284,676',
             networks: [
               {
                 network: 'Arbitrum',
-                tokenAmount: '2.24652 BTC',
-                balance: '2.24652',
-                value: '284,676.75'
-              }
-            ]
+                tokenAmount: '2.2465 BTC',
+                balance: '2.2465',
+                value: '284,676',
+              },
+            ],
           },
           {
             token: 'BTC',
-            balance: '1.75423',
-            value: '221,415.25',
+            balance: '1.7542',
+            value: '221,415',
             networks: [
               {
                 network: 'Base',
-                tokenAmount: '1.75423 BTC',
-                balance: '1.75423',
-                value: '221,415.25'
-              }
-            ]
-          }
-        ]
+                tokenAmount: '1.7542 BTC',
+                balance: '1.7542',
+                value: '221,415',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Collateral',
-        balance: '4.70699',
+        balance: '4.7069',
         percentage: '22.22',
-        value: '594,658.10',
+        value: '594,658',
         protocols: [
           {
             protocol: 'Aave v3',
             market: 'Ethereum Core',
-            balance: '2.80357',
+            balance: '2.8035',
             apy: '3.10',
             value: '354,264',
             tokens: [
               {
                 token: 'cbBTC',
-                tokenAmount: '0.95000 cbBTC',
-                balance: '0.95000',
+                tokenAmount: '0.9500 cbBTC',
+                balance: '0.9500',
                 apy: '3.40',
-                value: '120,000'
+                value: '120,000',
               },
               {
                 token: 'WBTC',
-                tokenAmount: '0.75000 WBTC',
-                balance: '0.75000',
+                tokenAmount: '0.7500 WBTC',
+                balance: '0.7500',
                 apy: '2.80',
-                value: '95,000'
+                value: '95,000',
               },
               {
                 token: 'tBTC',
-                tokenAmount: '0.63000 tBTC',
-                balance: '0.63000',
+                tokenAmount: '0.6300 tBTC',
+                balance: '0.6300',
                 apy: '3.10',
-                value: '80,000'
+                value: '80,000',
               },
               {
                 token: 'LBTC',
-                tokenAmount: '0.47357 LBTC',
-                balance: '0.47357',
+                tokenAmount: '0.4735 LBTC',
+                balance: '0.4735',
                 apy: '3.60',
-                value: '59,264'
-              }
-            ]
+                value: '59,264',
+              },
+            ],
           },
           {
             protocol: 'Compound',
             market: 'Ethereum Core',
-            balance: '1.90342',
+            balance: '1.9034',
             apy: '2.85',
-            value: '240,393.70',
+            value: '240,393',
             tokens: [
               {
                 token: 'cbBTC',
-                tokenAmount: '1.20000 cbBTC',
-                balance: '1.20000',
+                tokenAmount: '1.2000 cbBTC',
+                balance: '1.2000',
                 apy: '3.30',
-                value: '160,803'
+                value: '160,803',
               },
               {
                 token: 'WBTC',
-                tokenAmount: '0.45000 WBTC',
-                balance: '0.45000',
+                tokenAmount: '0.4500 WBTC',
+                balance: '0.4500',
                 apy: '2.60',
-                value: '56,850'
+                value: '56,850',
               },
               {
                 token: 'tBTC',
-                tokenAmount: '0.18000 tBTC',
-                balance: '0.18000',
+                tokenAmount: '0.1800 tBTC',
+                balance: '0.1800',
                 apy: '3.00',
-                value: '22,740'
-              }
-            ]
-          }
-        ]
+                value: '22,740',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Liquidity Pools',
-        balance: '9.01895',
+        balance: '9.0189',
         percentage: '19.44',
-        value: '1,139,206.00',
+        value: '1,139,206',
         protocols: [
           {
             protocol: 'Uniswap',
             market: 'Ethereum',
             balance: '5.7610',
             percentage: '12.41',
-            value: '727,506.25',
+            value: '727,506',
             poolPairs: [
               {
                 token: 'WBTC',
                 poolPair: 'WBTC/ETH',
-                tokenAmount: '2.00427 WBTC',
-                balance: '2.00427',
+                tokenAmount: '2.0042 WBTC',
+                balance: '2.0042',
                 apy: '7.85',
-                value: '253,046.00'
+                value: '253,046',
               },
               {
                 token: 'WBTC',
                 poolPair: 'WBTC/LBTC',
-                tokenAmount: '1.85319 WBTC',
-                balance: '1.85319',
+                tokenAmount: '1.8531 WBTC',
+                balance: '1.8531',
                 apy: '6.40',
-                value: '234,066.55'
+                value: '234,066',
               },
               {
                 token: 'LBTC',
                 poolPair: 'LBTC/WBTC',
-                tokenAmount: '1.90292 LBTC',
-                balance: '1.90388',
+                tokenAmount: '1.9029 LBTC',
+                balance: '1.9038',
                 apy: '6.40',
-                value: '240,393.70'
-              }
-            ]
+                value: '240,393',
+              },
+            ],
           },
           {
             protocol: 'Curve',
             market: 'Ethereum',
             balance: '3.25761',
             percentage: '7.02',
-            value: '411,699.75',
+            value: '411,699',
             poolPairs: [
               {
                 token: 'WBTC',
                 poolPair: 'WBTC/cbBTC',
-                tokenAmount: '1.20150 WBTC',
-                balance: '1.20150',
+                tokenAmount: '1.2015 WBTC',
+                balance: '1.2015',
                 apy: '5.90',
-                value: '151,898.25'
+                value: '151,898',
               },
               {
                 token: 'LBTC',
                 poolPair: 'LBTC/cbBTC',
-                tokenAmount: '1.05611 LBTC',
-                balance: '1.05611',
+                tokenAmount: '1.0561 LBTC',
+                balance: '1.0561',
                 apy: '5.40',
-                value: '133,873.75'
+                value: '133,873',
               },
               {
                 token: 'cbBTC',
                 poolPair: 'cbBTC/WBTC',
-                tokenAmount: '1.00000 cbBTC',
-                balance: '1.00000',
+                tokenAmount: '1.0000 cbBTC',
+                balance: '1.0000',
                 apy: '6.10',
-                value: '125,927.75'
-              }
-            ]
-          }
-        ]
+                value: '125,927',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Yield Loops',
@@ -284,9 +294,32 @@ export const assets: AssetData[] = [
                 address: '0xb5C9...Adf4',
                 balance: '2.8912',
                 netApy: '6.20',
-                value: '365,044'
-              }
-            ]
+                value: '365,044',
+                details: {
+                  currentPrice: '1.0000 BTC',
+                  liquidationPrice: '0.9217 BTC',
+                  healthFactor: '1.05',
+                  supplied: [
+                    {
+                      token: 'BTC',
+                      tokenAmount: '3.0500 BTC',
+                      balance: '3.0500',
+                      apy: '7.20',
+                      value: '412,500',
+                    },
+                  ],
+                  borrowed: [
+                    {
+                      token: 'BTC',
+                      tokenAmount: '0.4200 BTC',
+                      balance: '0.4200',
+                      apy: '1.90',
+                      value: '47,456',
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
             protocol: 'Compound',
@@ -299,13 +332,36 @@ export const assets: AssetData[] = [
                 address: '0xa2D8...Bc3e',
                 balance: '1.8911',
                 netApy: '5.80',
-                value: '238,000'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                value: '238,000',
+                details: {
+                  currentPrice: '1.0000 BTC',
+                  liquidationPrice: '0.9079 BTC',
+                  healthFactor: '1.05',
+                  supplied: [
+                    {
+                      token: 'BTC',
+                      tokenAmount: '2.0500 BTC',
+                      balance: '2.0500',
+                      apy: '6.10',
+                      value: '292,000',
+                    },
+                  ],
+                  borrowed: [
+                    {
+                      token: 'BTC',
+                      tokenAmount: '0.3000 BTC',
+                      balance: '0.3000',
+                      apy: '2.10',
+                      value: '54,000',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   {
     token: 'ETH',
@@ -329,16 +385,16 @@ export const assets: AssetData[] = [
                 tokenAmount: '9.6847 ETH',
                 balance: '9.6847',
                 value: '42,136.84',
-                walletAddress: '0xb5C9...Adf4'
+                walletAddress: '0xb5C9...Adf4',
               },
               {
                 network: 'Ethereum',
                 tokenAmount: '8.8206 ETH',
                 balance: '8.8206',
                 value: '38,378.43',
-                walletAddress: '0xd833...8D10'
-              }
-            ]
+                walletAddress: '0xd833...8D10',
+              },
+            ],
           },
           {
             token: 'WETH',
@@ -350,18 +406,18 @@ export const assets: AssetData[] = [
                 tokenAmount: '7.2150 WETH',
                 balance: '7.2150',
                 value: '31,353.20',
-                walletAddress: '0xb5C9...Adf4'
+                walletAddress: '0xb5C9...Adf4',
               },
               {
                 network: 'Ethereum',
                 tokenAmount: '5.1205 WETH',
                 balance: '5.1205',
                 value: '22,259.10',
-                walletAddress: '0xd833...8D10'
-              }
-            ]
-          }
-        ]
+                walletAddress: '0xd833...8D10',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Staking',
@@ -380,15 +436,15 @@ export const assets: AssetData[] = [
                 network: 'Ethereum',
                 tokenAmount: '8.9532 wstETH',
                 balance: '10.9474',
-                value: '47,528.92'
+                value: '47,528.92',
               },
               {
                 network: 'Arbitrum',
                 tokenAmount: '5.9688 wstETH',
                 balance: '7.2847',
-                value: '31,659.28'
-              }
-            ]
+                value: '31,659.28',
+              },
+            ],
           },
           {
             token: 'rETH',
@@ -401,15 +457,15 @@ export const assets: AssetData[] = [
                 network: 'Ethereum',
                 tokenAmount: '8.0045 rETH',
                 balance: '9.2063',
-                value: '40,078.50'
+                value: '40,078.50',
               },
               {
                 network: 'Base',
                 tokenAmount: '3.0337 rETH',
                 balance: '3.4976',
-                value: '15,179.20'
-              }
-            ]
+                value: '15,179.20',
+              },
+            ],
           },
           {
             token: 'weETH',
@@ -422,17 +478,17 @@ export const assets: AssetData[] = [
                 network: 'Ethereum',
                 tokenAmount: '5.9184 weETH',
                 balance: '6.4123',
-                value: '27,899.92'
+                value: '27,899.92',
               },
               {
                 network: 'Arbitrum',
                 tokenAmount: '3.6991 weETH',
                 balance: '4.0078',
-                value: '17,437.51'
-              }
-            ]
-          }
-        ]
+                value: '17,437.51',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Yield Loops',
@@ -462,8 +518,8 @@ export const assets: AssetData[] = [
                       tokenAmount: '462.62 weETH',
                       balance: '502.85',
                       apy: '4.20',
-                      value: '2,187,900'
-                    }
+                      value: '2,187,900',
+                    },
                   ],
                   borrowed: [
                     {
@@ -471,12 +527,12 @@ export const assets: AssetData[] = [
                       tokenAmount: '450.43 ETH',
                       balance: '450.43',
                       apy: '3.10',
-                      value: '1,959,821'
-                    }
-                  ]
-                }
-              }
-            ]
+                      value: '1,959,821',
+                    },
+                  ],
+                },
+              },
+            ],
           },
           {
             protocol: 'Aave v3',
@@ -500,8 +556,8 @@ export const assets: AssetData[] = [
                       tokenAmount: '5.55 wstETH',
                       balance: '5.02',
                       apy: '3.80',
-                      value: '26,100'
-                    }
+                      value: '26,100',
+                    },
                   ],
                   borrowed: [
                     {
@@ -509,14 +565,14 @@ export const assets: AssetData[] = [
                       tokenAmount: '3.92 ETH',
                       balance: '3.92',
                       apy: '2.85',
-                      value: '20,400'
-                    }
-                  ]
-                }
-              }
-            ]
-          }
-        ]
+                      value: '20,400',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Collateral',
@@ -536,30 +592,30 @@ export const assets: AssetData[] = [
                 tokenAmount: '3.1487 wstETH',
                 balance: '5.1200',
                 apy: '3.60',
-                value: '22,279'
+                value: '22,279',
               },
               {
                 token: 'rETH',
                 tokenAmount: '2.0974 rETH',
                 balance: '3.4105',
                 apy: '3.40',
-                value: '14,844'
+                value: '14,844',
               },
               {
                 token: 'cbETH',
                 tokenAmount: '1.9031 cbETH',
                 balance: '3.0900',
                 apy: '3.20',
-                value: '13,455'
+                value: '13,455',
               },
               {
                 token: 'WETH',
                 tokenAmount: '2.8013 WETH',
                 balance: '2.8300',
                 apy: '2.80',
-                value: '12,315'
-              }
-            ]
+                value: '12,315',
+              },
+            ],
           },
           {
             protocol: 'Aave v3',
@@ -573,32 +629,32 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.9500 weETH',
                 balance: '3.8500',
                 apy: '3.80',
-                value: '16,740'
+                value: '16,740',
               },
               {
                 token: 'wstETH',
                 tokenAmount: '1.7200 wstETH',
                 balance: '2.8500',
                 apy: '3.60',
-                value: '12,387'
+                value: '12,387',
               },
               {
                 token: 'MATIC',
                 tokenAmount: '18,500 MATIC',
                 balance: '1.9500',
                 apy: '4.10',
-                value: '8,475'
+                value: '8,475',
               },
               {
                 token: 'aETH',
                 tokenAmount: '0.5400 aETH',
                 balance: '0.5340',
                 apy: '2.70',
-                value: '2,348'
-              }
-            ]
-          }
-        ]
+                value: '2,348',
+              },
+            ],
+          },
+        ],
       },
       {
         positionType: 'Liquidity Pools',
@@ -619,7 +675,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '6.5003 ETH',
                 balance: '6.5003',
                 apy: '10.20',
-                value: '28,282.12'
+                value: '28,282.12',
               },
               {
                 token: 'wstETH',
@@ -627,7 +683,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.1287 wstETH',
                 balance: '5.2003',
                 apy: '6.00',
-                value: '11,313.05'
+                value: '11,313.05',
               },
               {
                 token: 'weETH',
@@ -635,7 +691,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.1046 weETH',
                 balance: '4.5604',
                 apy: '7.15',
-                value: '11,313.06'
+                value: '11,313.06',
               },
               {
                 token: 'ETH',
@@ -643,7 +699,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.1252 ETH',
                 balance: '2.1252',
                 apy: '7.15',
-                value: '9,246.31'
+                value: '9,246.31',
               },
               {
                 token: 'weETH',
@@ -651,7 +707,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.9615 weETH',
                 balance: '2.1252',
                 apy: '7.15',
-                value: '9,246.30'
+                value: '9,246.30',
               },
               {
                 token: 'ETH',
@@ -659,9 +715,9 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.3498 ETH',
                 balance: '0.3498',
                 apy: '5.40',
-                value: '1,522.02'
-              }
-            ]
+                value: '1,522.02',
+              },
+            ],
           },
           {
             protocol: 'Curve',
@@ -676,7 +732,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '3.1500 wstETH',
                 balance: '3.5200',
                 apy: '4.35',
-                value: '23,120.00'
+                value: '23,120.00',
               },
               {
                 token: 'ETH',
@@ -684,7 +740,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.6200 rETH',
                 balance: '2.0200',
                 apy: '5.60',
-                value: '13,275.00'
+                value: '13,275.00',
               },
               {
                 token: 'weETH',
@@ -692,7 +748,7 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.5800 cbETH',
                 balance: '1.9104',
                 apy: '5.20',
-                value: '12,555.00'
+                value: '12,555.00',
               },
               {
                 token: 'weETH',
@@ -700,24 +756,396 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.3400 weETH',
                 balance: '1.6900',
                 apy: '4.90',
-                value: '11,094.34'
-              }
-            ]
-          }
-        ]
-      }
-    ]
+                value: '11,094.34',
+              },
+            ],
+          },
+        ],
+      },
+    ],
   },
   { token: 'SOL', balance: '1,000', percentage: '2.08', value: '90,275' },
   {
     token: 'USD',
     balance: '35,779,667',
     percentage: '89.17',
-    value: '35,779,667'
-  }
-]
+    value: '35,779,667',
+    positionTypes: [
+      // Matches USD position-type breakdown in the Figma
+      {
+        positionType: 'Yield Loops',
+        balance: '1,329,667',
+        percentage: '3.72',
+        value: '1,329,667',
+        protocols: [
+          {
+            protocol: 'Aave v3',
+            market: 'Ethereum Core',
+            balance: '542,318',
+            netApy: '7.25',
+            value: '542,318',
+            walletAddresses: [
+              {
+                address: '0xb5C9...Adf4',
+                balance: '905,750',
+                netApy: '7.25',
+                value: '905,750',
+                details: {
+                  currentPrice: '1.00 USD',
+                  liquidationPrice: '0.9724 USD',
+                  healthFactor: '1.06',
+                  supplied: [
+                    {
+                      token: 'PT-sUSDe-05FEB2026',
+                      tokenAmount: '1,197,842 PT-sUSDe-05FEB2026',
+                      balance: '1,187,170',
+                      apy: '11.20',
+                      value: '1,197,842',
+                    },
+                  ],
+                  borrowed: [
+                    {
+                      token: 'USDe',
+                      tokenAmount: '292,092 USDe',
+                      balance: '292,092',
+                      apy: '2.90',
+                      value: '292,092',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            protocol: 'Morpho',
+            market: 'Arbitrum',
+            balance: '418,905',
+            netApy: '6.85',
+            value: '418,905',
+            walletAddresses: [
+              {
+                address: '0xa2D8...Bc3e',
+                balance: '418,905',
+                netApy: '6.85',
+                value: '418,905',
+                details: {
+                  currentPrice: '1.00 USD',
+                  liquidationPrice: '0.9758 USD',
+                  healthFactor: '1.05',
+                  supplied: [
+                    {
+                      token: 'USDC',
+                      tokenAmount: '502,418 USDC',
+                      balance: '502,418',
+                      apy: '5.30',
+                      value: '502,418',
+                    },
+                  ],
+                  borrowed: [
+                    {
+                      token: 'USDT',
+                      tokenAmount: '83,513 USDT',
+                      balance: '83,513',
+                      apy: '1.95',
+                      value: '83,513',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            protocol: 'Spark',
+            market: 'Ethereum Core',
+            balance: '368,442',
+            netApy: '8.10',
+            value: '368,442',
+            walletAddresses: [
+              {
+                address: '0xb5C9...Adf4',
+                balance: '368,442',
+                netApy: '8.10',
+                value: '368,442',
+                details: {
+                  currentPrice: '1.00 USD',
+                  liquidationPrice: '0.9691 USD',
+                  healthFactor: '1.06',
+                  supplied: [
+                    {
+                      token: 'DAI',
+                      tokenAmount: '421,900 DAI',
+                      balance: '421,900',
+                      apy: '4.90',
+                      value: '421,900',
+                    },
+                  ],
+                  borrowed: [
+                    {
+                      token: 'USDC',
+                      tokenAmount: '53,457 USDC',
+                      balance: '53,457',
+                      apy: '1.65',
+                      value: '53,457',
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        positionType: 'Wallet Balance',
+        balance: '14,500,238',
+        percentage: '40.53',
+        value: '14,500,238',
+        // Simple USD wallet breakdown so the row has data when expanded
+        tokens: [
+          {
+            token: 'USD',
+            balance: '8,700,143',
+            value: '8,700,143',
+            networks: [
+              {
+                network: 'Ethereum',
+                tokenAmount: '8,700,143 USD',
+                balance: '8,700,143',
+                value: '8,700,143',
+              },
+            ],
+          },
+          {
+            token: 'USD',
+            balance: '5,800,095',
+            value: '5,800,095',
+            networks: [
+              {
+                network: 'Arbitrum',
+                tokenAmount: '5,800,095 USD',
+                balance: '5,800,095',
+                value: '5,800,095',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        // Staking table with sUSDe / eUSD and network breakdown
+        positionType: 'Staking',
+        balance: '9,250,184',
+        percentage: '25.85',
+        value: '9,250,184',
+        tokens: [
+          {
+            token: 'sUSDe',
+            tokenAmount: '4,985,317 sUSDe',
+            balance: '5,138,743',
+            apy: '4.10',
+            value: '5,138,743',
+            networks: [
+              {
+                network: 'Ethereum',
+                tokenAmount: '3,165,492 sUSDe',
+                balance: '3,193,214',
+                value: '3,193,214',
+              },
+              {
+                network: 'Arbitrum',
+                tokenAmount: '1,819,825 sUSDe',
+                balance: '1,945,529',
+                value: '1,945,529',
+              },
+            ],
+          },
+          {
+            token: 'eUSD',
+            tokenAmount: '4,045,283 eUSD',
+            balance: '4,111,442',
+            apy: '5.05',
+            value: '4,111,442',
+            networks: [
+              {
+                network: 'Optimism',
+                tokenAmount: '2,347,619 eUSD',
+                balance: '2,362,814',
+                value: '2,362,814',
+              },
+              {
+                network: 'Arbitrum',
+                tokenAmount: '1,736,698 eUSD',
+                balance: '1,748,628',
+                value: '1,748,628',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        // Collateral protocols (Aave v3 + Compound) with stablecoin tokens
+        positionType: 'Collateral',
+        balance: '6,799,299',
+        percentage: '19.00',
+        value: '6,799,299',
+        protocols: [
+          {
+            protocol: 'Aave v3',
+            market: 'Ethereum Core',
+            balance: '4,062,184',
+            apy: '4.25',
+            value: '4,062,184',
+            tokens: [
+              {
+                token: 'USDC',
+                tokenAmount: '1,420,314 USDC',
+                balance: '1,420,314',
+                apy: '4.10',
+                value: '1,420,314',
+              },
+              {
+                token: 'USDT',
+                tokenAmount: '1,061,882 USDT',
+                balance: '1,061,882',
+                apy: '3.90',
+                value: '1,061,882',
+              },
+              {
+                token: 'DAI',
+                tokenAmount: '679,103 DAI',
+                balance: '679,103',
+                apy: '4.30',
+                value: '679,103',
+              },
+              {
+                token: 'sUSDe',
+                tokenAmount: '889,747 sUSDe',
+                balance: '900,888',
+                apy: '5.20',
+                value: '900,888',
+              },
+            ],
+          },
+          {
+            protocol: 'Compound',
+            market: 'Arbitrum',
+            balance: '2,737,114',
+            apy: '5.10',
+            value: '2,737,114',
+            tokens: [
+              {
+                token: 'USDC',
+                tokenAmount: '1,588,219 USDC',
+                balance: '1,586,219',
+                apy: '5.30',
+                value: '1,586,219',
+              },
+              {
+                token: 'DAI',
+                tokenAmount: '1,150,895 DAI',
+                balance: '1,150,895',
+                apy: '4.80',
+                value: '1,150,895',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        // Liquidity pools protocols (Uniswap + Curve) with pool pairs
+        positionType: 'Liquidity Pools',
+        balance: '3,900,276',
+        percentage: '10.90',
+        value: '3,900,276',
+        protocols: [
+          {
+            protocol: 'Uniswap',
+            market: 'Ethereum',
+            balance: '2,487,364',
+            percentage: '6.90',
+            value: '2,487,364',
+            poolPairs: [
+              {
+                token: 'USDC',
+                poolPair: 'USDC / USDT',
+                tokenAmount: '512,387 USDC',
+                balance: '512,387',
+                apy: '6.80',
+                value: '512,387',
+              },
+              {
+                token: 'USDT',
+                poolPair: 'USDT / USDC',
+                tokenAmount: '498,864 USDT',
+                balance: '498,864',
+                apy: '6.80',
+                value: '498,864',
+              },
+              {
+                token: 'DAI',
+                poolPair: 'DAI / USDC',
+                tokenAmount: '271,846 DAI',
+                balance: '271,846',
+                apy: '6.40',
+                value: '271,846',
+              },
+              {
+                token: 'USDC',
+                poolPair: 'DAI / USDC',
+                tokenAmount: '129,715 USDC',
+                balance: '129,715',
+                apy: '6.50',
+                value: '129,715',
+              },
+            ],
+          },
+          {
+            protocol: 'Curve',
+            market: 'Ethereum',
+            balance: '1,412,912',
+            percentage: '4.00',
+            value: '1,412,912',
+            // Curve LP breakdown for USD (matches LP design)
+            poolPairs: [
+              {
+                token: 'USDC',
+                poolPair: 'USDC / USDT',
+                tokenAmount: '512,387 USDC',
+                balance: '512,387',
+                apy: '6.80',
+                value: '512,387',
+              },
+              {
+                token: 'USDT',
+                poolPair: 'USDT / USDC',
+                tokenAmount: '498,864 USDT',
+                balance: '498,864',
+                apy: '6.80',
+                value: '498,864',
+              },
+              {
+                token: 'DAI',
+                poolPair: 'DAI / USDC',
+                tokenAmount: '271,846 DAI',
+                balance: '271,846',
+                apy: '6.40',
+                value: '271,846',
+              },
+              {
+                token: 'USDC',
+                poolPair: 'DAI / USDC',
+                tokenAmount: '129,715 USDC',
+                balance: '129,715',
+                apy: '6.50',
+                value: '129,715',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
 
 export const debts = [
   { token: 'USDC', balance: '10500', value: '11,200' },
-  { token: 'ETH', balance: '3.000', value: '87,734' }
-]
+  { token: 'ETH', balance: '3.000', value: '87,734' },
+];

@@ -1,17 +1,17 @@
-import { extendTheme } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react';
 
 const theme = extendTheme({
   config: {
     initialColorMode: 'dark',
-    useSystemColorMode: false
+    useSystemColorMode: false,
   },
   styles: {
     global: {
       body: {
         bg: '#0B091A', // Darkest background from palette
-        color: 'white'
-      }
-    }
+        color: 'white',
+      },
+    },
   },
   colors: {
     brand: {
@@ -24,13 +24,13 @@ const theme = extendTheme({
       600: '#4F52CC',
       700: '#3B3D99',
       800: '#272966',
-      900: '#131433'
+      900: '#131433',
     },
     dark: {
       bg: '#0B091A', // Darkest background
       card: '#1C1833', // Dark blue/purple card background
       hover: '#2A2641', // Dark blue/gray hover state
-      nested: '#1C1833' // Nested backgrounds
+      nested: '#1C1833', // Nested backgrounds
     },
     accent: {
       purple: '#7D67FF', // Light purple/lavender
@@ -41,16 +41,16 @@ const theme = extendTheme({
       red: '#F46565', // Coral/red-orange
       orange: '#FFC063', // Orange/amber
       white: '#FFFFFF',
-      white50: 'rgba(255, 255, 255, 0.5)' // White with 50% opacity
-    }
+      white50: 'rgba(255, 255, 255, 0.5)', // White with 50% opacity
+    },
   },
   components: {
     Button: {
       defaultProps: {
-        colorScheme: 'brand'
-      }
-    }
-  }
-})
+        colorScheme: 'brand',
+      },
+    },
+  },
+});
 
-export default theme
+export default theme;

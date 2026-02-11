@@ -1,18 +1,24 @@
-import { Box, Flex, Text, Icon, Grid } from '@chakra-ui/react'
-import { MdRemoveRedEye } from 'react-icons/md'
-import { FiSettings } from 'react-icons/fi'
-import StatCard from './StatCard'
-import TotalPerformance from './TotalPerformance'
-import AssetsDistribution from './AssetsDistribution'
-import DebtOverview from './DebtOverview'
-import PortfolioSection from './PortfolioSection'
-import DeFiLoans from './DeFiLoans'
+import { Box, Flex, Text, Icon, Grid } from '@chakra-ui/react';
+import { MdRemoveRedEye } from 'react-icons/md';
+import { FiSettings } from 'react-icons/fi';
+import StatCard from './StatCard';
+import TotalPerformance from './TotalPerformance';
+import AssetsDistribution from './AssetsDistribution';
+import DebtOverview from './DebtOverview';
+import PortfolioSection from './PortfolioSection';
+import DeFiLoans from './DeFiLoans';
 
 export default function PortfolioSummary() {
   return (
     <Box>
       {/* Header */}
-      <Flex justify="space-between" align={{ base: 'flex-start', md: 'center' }} mb={6} gap={3} flexWrap="wrap">
+      <Flex
+        justify="space-between"
+        align={{ base: 'flex-start', md: 'center' }}
+        mb={6}
+        gap={3}
+        flexWrap="wrap"
+      >
         <Flex align="baseline" gap={3} flexWrap="wrap">
           <Text fontSize={{ base: '24px', md: '32px' }} fontWeight="bold">
             Portfolio Summary
@@ -33,7 +39,15 @@ export default function PortfolioSummary() {
       </Flex>
 
       {/* Stat Cards */}
-      <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', xl: 'repeat(3, 1fr)' }} gap={6} mb={6}>
+      <Grid
+        templateColumns={{
+          base: '1fr',
+          md: 'repeat(2, 1fr)',
+          xl: 'repeat(3, 1fr)',
+        }}
+        gap={6}
+        mb={6}
+      >
         <StatCard
           title="Total Assets"
           subtitle="All Accounts"
@@ -67,7 +81,12 @@ export default function PortfolioSummary() {
       <TotalPerformance />
 
       {/* Assets Distribution and Debt Overview */}
-      <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }} gap={6} mb={6} mt={0}>
+      <Grid
+        templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
+        gap={6}
+        mb={6}
+        mt={0}
+      >
         <AssetsDistribution />
         <DebtOverview />
       </Grid>
@@ -78,5 +97,5 @@ export default function PortfolioSummary() {
       {/* DeFi Loans */}
       <DeFiLoans />
     </Box>
-  )
+  );
 }

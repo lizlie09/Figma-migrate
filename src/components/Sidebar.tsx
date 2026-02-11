@@ -1,5 +1,5 @@
-import { Box, Flex, Text, Icon } from '@chakra-ui/react'
-import { MdGridView } from 'react-icons/md'
+import { Box, Flex, Text, Icon } from '@chakra-ui/react';
+import { MdGridView } from 'react-icons/md';
 
 export default function Sidebar() {
   return (
@@ -14,7 +14,11 @@ export default function Sidebar() {
       borderBottom={{ base: '1px solid #2A2641', md: 'none' }}
       zIndex={10}
     >
-      <Text fontSize={{ base: '16px', md: '18px' }} fontWeight="bold" mb={{ base: 3, md: 8 }}>
+      <Text
+        fontSize={{ base: '16px', md: '18px' }}
+        fontWeight="bold"
+        mb={{ base: 3, md: 8 }}
+      >
         <Text as="span" color="#7D67FF">
           Crypto
         </Text>{' '}
@@ -38,5 +42,5 @@ export default function Sidebar() {
         </Text>
       </Flex>
     </Box>
-  )
+  );
 }

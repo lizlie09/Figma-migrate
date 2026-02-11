@@ -1,13 +1,13 @@
-import { Box, Flex, Text, Image } from '@chakra-ui/react'
-import { AreaChart, Area, ResponsiveContainer } from 'recharts'
+import { Box, Flex, Text, Image } from '@chakra-ui/react';
+import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 
 interface CryptoPerformanceCardProps {
-  name: string
-  fullName: string
-  value: string
-  priceChange: string
-  percentage: string
-  chartColor: string
+  name: string;
+  fullName: string;
+  value: string;
+  priceChange: string;
+  percentage: string;
+  chartColor: string;
 }
 
 const miniChartData = [
@@ -20,8 +20,8 @@ const miniChartData = [
   { value: 50 },
   { value: 65 },
   { value: 60 },
-  { value: 75 }
-]
+  { value: 75 },
+];
 
 export default function CryptoPerformanceCard({
   name,
@@ -29,15 +29,15 @@ export default function CryptoPerformanceCard({
   value,
   priceChange,
   percentage,
-  chartColor
+  chartColor,
 }: CryptoPerformanceCardProps) {
-  const isPositive = percentage.startsWith('+')
+  const isPositive = percentage.startsWith('+');
   const iconMap: Record<string, string> = {
     BTC: '/images/btc.png',
     ETH: '/images/eth.png',
-    SOL: '/images/sol.png'
-  }
-  const iconSrc = iconMap[name]
+    SOL: '/images/sol.png',
+  };
+  const iconSrc = iconMap[name];
 
   return (
     <Box
@@ -115,5 +115,5 @@ export default function CryptoPerformanceCard({
         </Text>
       </Flex>
     </Box>
-  )
+  );
 }

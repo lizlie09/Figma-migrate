@@ -1,15 +1,15 @@
-import { Box, Flex, Text, Icon } from '@chakra-ui/react'
-import { MdAccountBalanceWallet, MdTrendingUp } from 'react-icons/md'
-import { FaMoneyBillWave } from 'react-icons/fa'
+import { Box, Flex, Text, Icon } from '@chakra-ui/react';
+import { MdAccountBalanceWallet, MdTrendingUp } from 'react-icons/md';
+import { FaMoneyBillWave } from 'react-icons/fa';
 
 interface StatCardProps {
-  title: string
-  subtitle: string
-  value: string
-  profit: string
-  percentage: string
-  icon: 'wallet' | 'debt' | 'trending'
-  iconBg: string
+  title: string;
+  subtitle: string;
+  value: string;
+  profit: string;
+  percentage: string;
+  icon: 'wallet' | 'debt' | 'trending';
+  iconBg: string;
 }
 
 export default function StatCard({
@@ -19,18 +19,18 @@ export default function StatCard({
   profit,
   percentage,
   icon,
-  iconBg
+  iconBg,
 }: StatCardProps) {
   const getIcon = () => {
     switch (icon) {
       case 'wallet':
-        return MdAccountBalanceWallet
+        return MdAccountBalanceWallet;
       case 'debt':
-        return FaMoneyBillWave
+        return FaMoneyBillWave;
       case 'trending':
-        return MdTrendingUp
+        return MdTrendingUp;
     }
-  }
+  };
 
   return (
     <Box
@@ -61,7 +61,12 @@ export default function StatCard({
         </Box>
       </Flex>
 
-      <Text fontSize={{ base: '22px', md: '24px' }} fontWeight="bold" mb={3} lineHeight="1.2">
+      <Text
+        fontSize={{ base: '22px', md: '24px' }}
+        fontWeight="bold"
+        mb={3}
+        lineHeight="1.2"
+      >
         {value}
       </Text>
 
@@ -75,5 +80,5 @@ export default function StatCard({
         </Text>
       </Flex>
     </Box>
-  )
+  );
 }
