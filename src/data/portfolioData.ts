@@ -285,36 +285,36 @@ export const assets: AssetData[] = [
         protocols: [
           {
             protocol: 'Aave v3',
-            market: 'Bitcoin Core',
+            market: 'Ethereum Core',
             balance: '2.8912',
             netApy: '6.20',
             value: '365,044',
             walletAddresses: [
               {
-                address: '0xb5C9...Adf4',
-                balance: '2.8912',
-                netApy: '6.20',
+                address: '0xd833...8D10',
+                balance: '0.4564 BTC',
+                netApy: '0.78%',
                 value: '365,044',
                 details: {
-                  currentPrice: '1.0000 BTC',
-                  liquidationPrice: '0.9217 BTC',
+                  currentPrice: '1.0045 BTC',
+                  liquidationPrice: '0.9837 BTC',
                   healthFactor: '1.05',
                   supplied: [
                     {
-                      token: 'BTC',
-                      tokenAmount: '3.0500 BTC',
-                      balance: '3.0500',
-                      apy: '7.20',
-                      value: '412,500',
+                      token: 'eBTC',
+                      tokenAmount: '2.4738 eBTC',
+                      balance: '2.4850',
+                      apy: '0.42',
+                      value: '293,783',
                     },
                   ],
                   borrowed: [
                     {
-                      token: 'BTC',
-                      tokenAmount: '0.4200 BTC',
-                      balance: '0.4200',
-                      apy: '1.90',
-                      value: '47,456',
+                      token: 'WBTC',
+                      tokenAmount: '2.0286 WBTC',
+                      balance: '2.0286',
+                      apy: '0.34',
+                      value: '152,744',
                     },
                   ],
                 },
@@ -322,7 +322,7 @@ export const assets: AssetData[] = [
             ],
           },
           {
-            protocol: 'Compound',
+            protocol: 'Morpho',
             market: 'Ethereum Core',
             balance: '1.8911',
             netApy: '5.80',
@@ -509,8 +509,8 @@ export const assets: AssetData[] = [
                 netApy: '7.40',
                 value: '29,067',
                 details: {
-                  currentPrice: '1.0000 ETH',
-                  liquidationPrice: '0.9217 ETH',
+                  currentPrice: '1.0870 ETH',
+                  liquidationPrice: '1.0440 ETH',
                   healthFactor: '1.05',
                   supplied: [
                     {

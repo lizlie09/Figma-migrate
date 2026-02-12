@@ -107,6 +107,8 @@ sx={{
   border="1px solid"
   borderColor="rgba(255, 255, 255, 0.12)"
   onClick={() => setIsPortfolioExpanded(!isPortfolioExpanded)}
+  flexShrink={0}
+
 >
   <Icon
     as={isPortfolioExpanded ? FiChevronUp : FiChevronDown}

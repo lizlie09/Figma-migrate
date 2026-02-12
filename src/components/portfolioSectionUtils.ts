@@ -51,6 +51,8 @@ export const getTokenIconSrc = (token: string): string | null => {
       return '/images/cbBTC.png';
     case 'Base':
       return '/images/Base.png';
+    case 'ARB':
+      return '/images/ARB.png';
     default:
       return null;
   }
@@ -66,6 +68,8 @@ export const getProtocolIconSrc = (protocol: string): string | null => {
       return '/images/curve.png';
     case 'Uniswap':
       return '/images/uniswap.png';
+    case 'Morpho':
+      return '/images/morpho.png';
     default:
       return null;
   }

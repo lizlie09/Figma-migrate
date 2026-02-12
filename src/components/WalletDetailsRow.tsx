@@ -25,7 +25,7 @@ export default function WalletDetailsRow({
     <Tr>
       <Td h="45px" colSpan={4} p={0}>
         <Collapse in={isWalletExpanded} animateOpacity>
-          <Box pr={4} py={4} bg="#1B1C2E" maxW="1000px" w="100%">
+          <Box pr={4} py={4} bg="#11C1833" maxW="1000px" w="100%">
             {/* Price Info Box */}
             <Box bg="#222038" borderRadius="12px" p={2} mb={4} border="1px solid" borderColor="#4A4360">
               <Flex w="100%" justify="space-between" gap={6}>
