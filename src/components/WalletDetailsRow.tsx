@@ -1,6 +1,5 @@
 import { Box, Flex, Icon, Image, Td, Text, Tr, Collapse } from '@chakra-ui/react';
 import { FiInfo } from 'react-icons/fi';
-
 import { formatNumber, getTokenIconSrc } from './portfolioSectionUtils';
 import type {
   SuppliedBorrowedToken,
