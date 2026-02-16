@@ -39,8 +39,8 @@ export const getTokenIconSrc = (token: string): string | null => {
       return '/images/cbETH.png';
     case 'MATIC':
       return '/images/MATIC.png';
-     case 'WBTC':
-    return '/images/WBTC.png';
+    case 'WBTC':
+      return '/images/WBTC.png';
     case 'LBTC':
       return '/images/LBTC.png';
     case 'eBTC':
