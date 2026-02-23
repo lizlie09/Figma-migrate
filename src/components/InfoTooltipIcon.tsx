@@ -1,4 +1,4 @@
-import { Box, Icon, Tooltip } from '@chakra-ui/react';
+import { Icon, Tooltip } from '@chakra-ui/react';
 import { FiInfo } from 'react-icons/fi';
 import type { ReactNode } from 'react';
 
@@ -15,24 +15,22 @@ export default function InfoTooltipIcon({
     <Tooltip
       placement={placement}
       hasArrow
-      arrowShadowColor="#8A63D2"
-      bg="#26214B"
+      bg="#1A1830"
       color="white"
-      border="1px solid"
-      borderColor="#8A63D2"
       borderRadius="8px"
       px={2}
-      py={1.5}
+      py={1}
       label={label}
+      shouldWrapChildren
+      border="1px solid #7D67FF"
     >
-      <Box as="span" cursor="help" display="inline-flex">
-        <Icon
-          as={FiInfo}
-          boxSize={4}
-          color="#FFFFFF"
-          _hover={{ color: 'gray.300' }}
-        />
-      </Box>
+      <Icon
+        as={FiInfo}
+        boxSize={4}
+        color="#FFFFFF"
+        cursor="pointer"
+        _hover={{ color: 'gray.300' }}
+      />
     </Tooltip>
   );
 }

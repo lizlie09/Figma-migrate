@@ -146,6 +146,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.9500 cbBTC',
                 balance: '0.9500',
                 apy: '3.40',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.80%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '120,000',
               },
               {
@@ -153,6 +157,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.7500 WBTC',
                 balance: '0.7500',
                 apy: '2.80',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.30%' },
+                  { label: 'Supply Rewards', value: '+0.50%' },
+                ],
                 value: '95,000',
               },
               {
@@ -160,6 +168,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.6300 tBTC',
                 balance: '0.6300',
                 apy: '3.10',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.60%' },
+                  { label: 'Supply Rewards', value: '+0.50%' },
+                ],
                 value: '80,000',
               },
               {
@@ -167,6 +179,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.4735 LBTC',
                 balance: '0.4735',
                 apy: '3.60',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '3.00%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '59,264',
               },
             ],
@@ -183,6 +199,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.2000 cbBTC',
                 balance: '1.2000',
                 apy: '3.30',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.70%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '160,803',
               },
               {
@@ -190,6 +210,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.4500 WBTC',
                 balance: '0.4500',
                 apy: '2.60',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.20%' },
+                  { label: 'Supply Rewards', value: '+0.40%' },
+                ],
                 value: '56,850',
               },
               {
@@ -197,6 +221,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.1800 tBTC',
                 balance: '0.1800',
                 apy: '3.00',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.50%' },
+                  { label: 'Supply Rewards', value: '+0.50%' },
+                ],
                 value: '22,740',
               },
             ],
@@ -306,6 +334,11 @@ export const assets: AssetData[] = [
                       balance: '2.4850',
                       apy: '0.42',
                       value: '293,783',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '0.38%' },
+                        { label: 'Supply Rewards', value: '+0.04%' },
+                      ],
+                      liquidationThreshold: '85.00',
                     },
                   ],
                   borrowed: [
@@ -315,6 +348,10 @@ export const assets: AssetData[] = [
                       balance: '2.0286',
                       apy: '0.34',
                       value: '152,744',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '0.38%' },
+                        { label: 'Borrow Incentives', value: '-0.04%' },
+                      ],
                     },
                   ],
                 },
@@ -344,6 +381,11 @@ export const assets: AssetData[] = [
                       balance: '2.0500',
                       apy: '6.10',
                       value: '292,000',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '5.20%' },
+                        { label: 'Morpho Rewards', value: '+0.90%' },
+                      ],
+                      liquidationThreshold: '85.00',
                     },
                   ],
                   borrowed: [
@@ -353,6 +395,10 @@ export const assets: AssetData[] = [
                       balance: '0.3000',
                       apy: '2.10',
                       value: '54,000',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '2.40%' },
+                        { label: 'Borrow Incentives', value: '-0.30%' },
+                      ],
                     },
                   ],
                 },
@@ -519,6 +565,11 @@ export const assets: AssetData[] = [
                       balance: '502.85',
                       apy: '4.20',
                       value: '2,187,900',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '3.50%' },
+                        { label: 'stETH Rewards', value: '+0.70%' },
+                      ],
+                      liquidationThreshold: '78.00',
                     },
                   ],
                   borrowed: [
@@ -528,6 +579,10 @@ export const assets: AssetData[] = [
                       balance: '450.43',
                       apy: '3.10',
                       value: '1,959,821',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '3.40%' },
+                        { label: 'Borrow Incentives', value: '-0.30%' },
+                      ],
                     },
                   ],
                 },
@@ -557,6 +612,11 @@ export const assets: AssetData[] = [
                       balance: '5.02',
                       apy: '3.80',
                       value: '26,100',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '3.20%' },
+                        { label: 'ARB Rewards', value: '+0.60%' },
+                      ],
+                      liquidationThreshold: '80.00',
                     },
                   ],
                   borrowed: [
@@ -566,6 +626,10 @@ export const assets: AssetData[] = [
                       balance: '3.92',
                       apy: '2.85',
                       value: '20,400',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '3.10%' },
+                        { label: 'Borrow Incentives', value: '-0.25%' },
+                      ],
                     },
                   ],
                 },
@@ -592,6 +656,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '3.1487 wstETH',
                 balance: '5.1200',
                 apy: '3.60',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '3.00%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '22,279',
               },
               {
@@ -599,6 +667,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.0974 rETH',
                 balance: '3.4105',
                 apy: '3.40',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.80%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '14,844',
               },
               {
@@ -606,6 +678,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.9031 cbETH',
                 balance: '3.0900',
                 apy: '3.20',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.60%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '13,455',
               },
               {
@@ -613,6 +689,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.8013 WETH',
                 balance: '2.8300',
                 apy: '2.80',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.40%' },
+                  { label: 'Supply Rewards', value: '+0.40%' },
+                ],
                 value: '12,315',
               },
             ],
@@ -629,6 +709,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '2.9500 weETH',
                 balance: '3.8500',
                 apy: '3.80',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '3.20%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '16,740',
               },
               {
@@ -636,6 +720,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '1.7200 wstETH',
                 balance: '2.8500',
                 apy: '3.60',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '3.00%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '12,387',
               },
               {
@@ -643,6 +731,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '18,500 MATIC',
                 balance: '1.9500',
                 apy: '4.10',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '3.50%' },
+                  { label: 'Supply Rewards', value: '+0.60%' },
+                ],
                 value: '8,475',
               },
               {
@@ -650,6 +742,10 @@ export const assets: AssetData[] = [
                 tokenAmount: '0.5400 aETH',
                 balance: '0.5340',
                 apy: '2.70',
+                apyBreakdown: [
+                  { label: 'Base Supply Rate', value: '2.30%' },
+                  { label: 'Supply Rewards', value: '+0.40%' },
+                ],
                 value: '2,348',
               },
             ],
@@ -801,15 +897,24 @@ export const assets: AssetData[] = [
                       balance: '1,187,170',
                       apy: '11.20',
                       value: '1,197,842',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '9.80%' },
+                        { label: 'Pendle Rewards', value: '+1.40%' },
+                      ],
+                      liquidationThreshold: '75.00',
                     },
                   ],
                   borrowed: [
                     {
                       token: 'USDe',
-                      tokenAmount: '292,092 USDe',
-                      balance: '292,092',
+                      tokenAmount: '893,417 USDe',
+                      balance: '893,417',
                       apy: '2.90',
-                      value: '292,092',
+                      value: '893,417',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '3.20%' },
+                        { label: 'Borrow Incentives', value: '-0.30%' },
+                      ],
                     },
                   ],
                 },
@@ -839,15 +944,24 @@ export const assets: AssetData[] = [
                       balance: '502,418',
                       apy: '5.30',
                       value: '502,418',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '4.60%' },
+                        { label: 'Morpho Rewards', value: '+0.70%' },
+                      ],
+                      liquidationThreshold: '80.00',
                     },
                   ],
                   borrowed: [
                     {
                       token: 'USDT',
-                      tokenAmount: '83,513 USDT',
-                      balance: '83,513',
+                      tokenAmount: '367,284 USDT',
+                      balance: '367,284',
                       apy: '1.95',
-                      value: '83,513',
+                      value: '367,284',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '2.15%' },
+                        { label: 'Borrow Incentives', value: '-0.20%' },
+                      ],
                     },
                   ],
                 },
@@ -877,15 +991,24 @@ export const assets: AssetData[] = [
                       balance: '421,900',
                       apy: '4.90',
                       value: '421,900',
+                      apyBreakdown: [
+                        { label: 'Base Supply Rate', value: '4.30%' },
+                        { label: 'DSR Bonus', value: '+0.60%' },
+                      ],
+                      liquidationThreshold: '78.00',
                     },
                   ],
                   borrowed: [
                     {
                       token: 'USDC',
-                      tokenAmount: '53,457 USDC',
-                      balance: '53,457',
+                      tokenAmount: '309,673 USDC',
+                      balance: '309,673',
                       apy: '1.65',
-                      value: '53,457',
+                      value: '309,673',
+                      apyBreakdown: [
+                        { label: 'Base Borrow Rate', value: '1.85%' },
+                        { label: 'Borrow Incentives', value: '-0.20%' },
+                      ],
                     },
                   ],
                 },

@@ -6,12 +6,19 @@ export interface NetworkData {
   walletAddress?: string;
 }
 
+export interface ApyBreakdownItem {
+  label: string;
+  value: string;
+}
+
 export interface SuppliedBorrowedToken {
   token: string;
   tokenAmount: string;
   balance: string;
   apy: string;
   value: string;
+  apyBreakdown?: ApyBreakdownItem[];
+  liquidationThreshold?: string;
 }
 
 export interface WalletDetails {
@@ -57,6 +64,7 @@ export interface TokenData {
   tokenAmount?: string;
   balance: string;
   apy?: string;
+  apyBreakdown?: ApyBreakdownItem[];
   value: string;
   networks?: NetworkData[];
 }

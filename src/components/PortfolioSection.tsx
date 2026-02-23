@@ -27,10 +27,35 @@ import {
   EMPHASIZED_TOKENS,
   formatNumber,
   getAaveUtilization,
-  getMarketWalletAddress,
+  // getMarketWalletAddress,
   getProtocolIconSrc,
   getTokenIconSrc,
 } from './portfolioSectionUtils';
+
+function ApyBreakdownLabel({
+  breakdown,
+}: {
+  breakdown: { label: string; value: string }[];
+}) {
+  return (
+    <Box p={1}>
+      {breakdown.map((item, i) => (
+        <Box key={i} mb={i < breakdown.length - 1 ? 2 : 0}>
+          <Text fontSize="11px" color="gray.400" fontWeight="600">
+            {item.label}
+          </Text>
+          <Text
+            fontSize="12px"
+            fontWeight="bold"
+            color={item.value.startsWith('-') ? '#FF6B6B' : 'white'}
+          >
+            {item.value}
+          </Text>
+        </Box>
+      ))}
+    </Box>
+  );
+}
 
 export default function PortfolioSection() {
   const [isPortfolioExpanded, setIsPortfolioExpanded] = useState(false);
@@ -970,34 +995,56 @@ export default function PortfolioSection() {
                                                                             }
                                                                             justify="flex-start"
                                                                           >
-                                                                            {
-                                                                              token.apy
-                                                                            }
-                                                                            %
+                                                                            {positionType.positionType ===
+                                                                            'Staking & Wrapped'
+                                                                              ? token.apy ===
+                                                                                'No APY'
+                                                                                ? token.apy
+                                                                                : `${token.apy}%`
+                                                                              : `${token.apy}%`}
                                                                             <InfoTooltipIcon
                                                                               label={
-                                                                                <Box>
-                                                                                  <Text
-                                                                                    fontWeight="bold"
-                                                                                    fontSize="11px"
-                                                                                    mb={
-                                                                                      0.5
-                                                                                    }
-                                                                                  >
-                                                                                    Staking
-                                                                                    APR
-                                                                                  </Text>
-                                                                                  <Text
-                                                                                    fontSize="11px"
-                                                                                    textDecoration="underline"
-                                                                                  >
-                                                                                    {
-                                                                                      token.apy
-                                                                                    }
-
-                                                                                    %
-                                                                                  </Text>
-                                                                                </Box>
+                                                                                positionType.positionType ===
+                                                                                'Staking & Wrapped' ? (
+                                                                                  token.apy ===
+                                                                                  'No APY' ? (
+                                                                                    'Wrapped Token'
+                                                                                  ) : (
+                                                                                    <Box>
+                                                                                      <Text
+                                                                                        fontSize="11px"
+                                                                                      >
+                                                                                        {
+                                                                                          token.apy
+                                                                                        }
+                                                                                        % + potential
+                                                                                        airdrops
+                                                                                      </Text>
+                                                                                    </Box>
+                                                                                  )
+                                                                                ) : (
+                                                                                  <Box>
+                                                                                    <Text
+                                                                                      fontWeight="bold"
+                                                                                      fontSize="11px"
+                                                                                      mb={
+                                                                                        0.5
+                                                                                      }
+                                                                                    >
+                                                                                      Staking
+                                                                                      APR
+                                                                                    </Text>
+                                                                                    <Text
+                                                                                      fontSize="11px"
+                                                                                      textDecoration="underline"
+                                                                                    >
+                                                                                      {
+                                                                                        token.apy
+                                                                                      }
+                                                                                      %
+                                                                                    </Text>
+                                                                                  </Box>
+                                                                                )
                                                                               }
                                                                             />
                                                                           </Flex>
@@ -1339,8 +1386,7 @@ export default function PortfolioSection() {
                                                                                                   fontSize="11px"
                                                                                                   textDecoration="underline"
                                                                                                 >
-                                                                                                  {network.walletAddress ??
-                                                                                                    `${formatNumber(network.value)} USD`}
+                                                                                                  0xd833...8D10
                                                                                                 </Text>
                                                                                               </Box>
                                                                                             }
@@ -1737,23 +1783,21 @@ export default function PortfolioSection() {
                                                                                 <Text
                                                                                   fontWeight="bold"
                                                                                   fontSize="11px"
-                                                                                  mb={
-                                                                                    0.5
-                                                                                  }
+                                                                                  sx={{
+                                                                                    whiteSpace:
+                                                                                      'nowrap',
+                                                                                  }}
                                                                                 >
-                                                                                  Net
-                                                                                  Supply
-                                                                                  APY
-                                                                                </Text>
-                                                                                <Text
-                                                                                  fontSize="11px"
-                                                                                  textDecoration="underline"
-                                                                                >
-                                                                                  {
-                                                                                    protocol.apy
-                                                                                  }
-
-                                                                                  %
+                                                                                  Net Supply APY{' '}
+                                                                                  <Text
+                                                                                    as="span"
+                                                                                    textDecoration="underline"
+                                                                                  >
+                                                                                    {
+                                                                                      protocol.apy
+                                                                                    }
+                                                                                    %
+                                                                                  </Text>
                                                                                 </Text>
                                                                                 {getAaveUtilization(
                                                                                   protocol.protocol,
@@ -1764,6 +1808,7 @@ export default function PortfolioSection() {
                                                                                     mt={
                                                                                       1
                                                                                     }
+                                                                                    fontWeight="bold"
                                                                                   >
                                                                                     Utilization{' '}
                                                                                     {getAaveUtilization(
@@ -2276,35 +2321,25 @@ export default function PortfolioSection() {
                                                                                                             Health
                                                                                                             Factor:
                                                                                                           </Text>
-                                                                                                          <Box
-                                                                                                            display="inline-block"
-                                                                                                            mt={
-                                                                                                              0.5
+                                                                                                          <Text
+                                                                                                            fontWeight="bold"
+                                                                                                            fontSize="14px"
+                                                                                                            color={
+                                                                                                              Number(
+                                                                                                                wallet
+                                                                                                                  .details
+                                                                                                                  .healthFactor,
+                                                                                                              ) >= 1
+                                                                                                                ? '#4CAF50'
+                                                                                                                : '#E05A5A'
                                                                                                             }
                                                                                                           >
-                                                                                                            <Box
-                                                                                                              bg="#3EDD87"
-                                                                                                              borderRadius="4px"
-                                                                                                              px={
-                                                                                                                2
-                                                                                                              }
-                                                                                                              py={
-                                                                                                                1
-                                                                                                              }
-                                                                                                            >
-                                                                                                              <Text
-                                                                                                                fontWeight="bold"
-                                                                                                                color="white"
-                                                                                                                fontSize="12px"
-                                                                                                              >
-                                                                                                                {
-                                                                                                                  wallet
-                                                                                                                    .details
-                                                                                                                    .healthFactor
-                                                                                                                }
-                                                                                                              </Text>
-                                                                                                            </Box>
-                                                                                                          </Box>
+                                                                                                            {
+                                                                                                              wallet
+                                                                                                                .details
+                                                                                                                .healthFactor
+                                                                                                            }
+                                                                                                          </Text>
                                                                                                         </Box>
                                                                                                       </Flex>
                                                                                                     </Box>
@@ -2420,19 +2455,18 @@ export default function PortfolioSection() {
                                                                                                                             token.token
                                                                                                                           }
                                                                                                                         </Text>
-                                                                                                                        <Icon
-                                                                                                                          as={
-                                                                                                                            FiInfo
-                                                                                                                          }
-                                                                                                                          boxSize={
-                                                                                                                            4
-                                                                                                                          }
-                                                                                                                          color="#FFFFFF"
-                                                                                                                          _hover={{
-                                                                                                                            color:
-                                                                                                                              'gray.300',
-                                                                                                                          }}
-                                                                                                                        />
+                                                                                                                        {token.apyBreakdown && token.apyBreakdown.length > 0 ? (
+                                                                                                                          <InfoTooltipIcon
+                                                                                                                            label={<ApyBreakdownLabel breakdown={token.apyBreakdown} />}
+                                                                                                                          />
+                                                                                                                        ) : (
+                                                                                                                          <Icon
+                                                                                                                            as={FiInfo}
+                                                                                                                            boxSize={4}
+                                                                                                                            color="#FFFFFF"
+                                                                                                                            _hover={{ color: 'gray.300' }}
+                                                                                                                          />
+                                                                                                                        )}
                                                                                                                       </Flex>
                                                                                                                     </Box>
 
@@ -2524,18 +2558,32 @@ export default function PortfolioSection() {
                                                                                                                         Supplied
                                                                                                                         APY
                                                                                                                       </Text>
-                                                                                                                      <Text
-                                                                                                                        color="#4CAF50"
-                                                                                                                        fontWeight="bold"
-                                                                                                                        pl={
-                                                                                                                          4
-                                                                                                                        }
+                                                                                                                      <Flex
+                                                                                                                        gap={2}
+                                                                                                                        pl={4}
                                                                                                                       >
-                                                                                                                        {
-                                                                                                                          token.apy
-                                                                                                                        }
-                                                                                                                        %
-                                                                                                                      </Text>
+                                                                                                                        <Text
+                                                                                                                          color="#4CAF50"
+                                                                                                                          fontWeight="bold"
+                                                                                                                        >
+                                                                                                                          {
+                                                                                                                            token.apy
+                                                                                                                          }
+                                                                                                                          %
+                                                                                                                        </Text>
+                                                                                                                        {token.apyBreakdown && token.apyBreakdown.length > 0 ? (
+                                                                                                                          <InfoTooltipIcon
+                                                                                                                            label={<ApyBreakdownLabel breakdown={token.apyBreakdown} />}
+                                                                                                                          />
+                                                                                                                        ) : (
+                                                                                                                          <Icon
+                                                                                                                            as={FiInfo}
+                                                                                                                            boxSize={4}
+                                                                                                                            color="#FFFFFF"
+                                                                                                                            _hover={{ color: 'gray.300' }}
+                                                                                                                          />
+                                                                                                                        )}
+                                                                                                                      </Flex>
                                                                                                                     </Box>
 
                                                                                                                     <Box
@@ -2671,6 +2719,18 @@ export default function PortfolioSection() {
                                                                                                                             token.token
                                                                                                                           }
                                                                                                                         </Text>
+                                                                                                                        {token.apyBreakdown && token.apyBreakdown.length > 0 ? (
+                                                                                                                          <InfoTooltipIcon
+                                                                                                                            label={<ApyBreakdownLabel breakdown={token.apyBreakdown} />}
+                                                                                                                          />
+                                                                                                                        ) : (
+                                                                                                                          <Icon
+                                                                                                                            as={FiInfo}
+                                                                                                                            boxSize={4}
+                                                                                                                            color="#FFFFFF"
+                                                                                                                            _hover={{ color: 'gray.300' }}
+                                                                                                                          />
+                                                                                                                        )}
                                                                                                                       </Flex>
                                                                                                                     </Box>
 
@@ -2762,18 +2822,33 @@ export default function PortfolioSection() {
                                                                                                                         Borrowed
                                                                                                                         APY
                                                                                                                       </Text>
-                                                                                                                      <Text
-                                                                                                                        color="#FF9800"
-                                                                                                                        fontWeight="bold"
-                                                                                                                        pl={
-                                                                                                                          4
-                                                                                                                        }
+                                                                                                                      <Flex
+                                                                                                                        align="center"
+                                                                                                                        gap={2}
+                                                                                                                        pl={4}
                                                                                                                       >
-                                                                                                                        {
-                                                                                                                          token.apy
-                                                                                                                        }
-                                                                                                                        %
-                                                                                                                      </Text>
+                                                                                                                        <Text
+                                                                                                                          color="#FF9800"
+                                                                                                                          fontWeight="bold"
+                                                                                                                        >
+                                                                                                                          {
+                                                                                                                            token.apy
+                                                                                                                          }
+                                                                                                                          %
+                                                                                                                        </Text>
+                                                                                                                        {token.apyBreakdown && token.apyBreakdown.length > 0 ? (
+                                                                                                                          <InfoTooltipIcon
+                                                                                                                            label={<ApyBreakdownLabel breakdown={token.apyBreakdown} />}
+                                                                                                                          />
+                                                                                                                        ) : (
+                                                                                                                          <Icon
+                                                                                                                            as={FiInfo}
+                                                                                                                            boxSize={4}
+                                                                                                                            color="#FFFFFF"
+                                                                                                                            _hover={{ color: 'gray.300' }}
+                                                                                                                          />
+                                                                                                                        )}
+                                                                                                                      </Flex>
                                                                                                                     </Box>
 
                                                                                                                     <Box
@@ -3035,10 +3110,10 @@ export default function PortfolioSection() {
                                                                                       getTokenIconSrc(
                                                                                         token.token,
                                                                                       );
-                                                                                    const marketWalletAddress =
-                                                                                      getMarketWalletAddress(
-                                                                                        protocol.market,
-                                                                                      );
+                                                                                    // const marketWalletAddress =
+                                                                                    //   getMarketWalletAddress(
+                                                                                    //     protocol.market,
+                                                                                    //   );
                                                                                     return (
                                                                                       <Tr
                                                                                         key={`${protocolKey}-${token.token}`}
@@ -3096,17 +3171,17 @@ export default function PortfolioSection() {
                                                                                         >
                                                                                           <Flex
                                                                                             align="center"
-                                                                                            gap={
-                                                                                              1
-                                                                                            }
+                                                                                            gap={1}
                                                                                             justify="flex-start"
                                                                                             whiteSpace="nowrap"
                                                                                           >
-                                                                                            {
-                                                                                              token.apy
-                                                                                            }
-
-                                                                                            %
+                                                                                            {token.apy}%
+                                                                                            {token.apyBreakdown && token.apyBreakdown.length > 0 && (
+                                                                                              <InfoTooltipIcon
+                                                                                                placement="top"
+                                                                                                label={<ApyBreakdownLabel breakdown={token.apyBreakdown} />}
+                                                                                              />
+                                                                                            )}
                                                                                           </Flex>
                                                                                         </Td>
                                                                                         <Td
@@ -3140,8 +3215,7 @@ export default function PortfolioSection() {
                                                                                                     fontSize="11px"
                                                                                                     textDecoration="underline"
                                                                                                   >
-                                                                                                    {marketWalletAddress ??
-                                                                                                      `${formatNumber(token.value)} USD`}
+                                                                                                   0xd833...8D10
                                                                                                   </Text>
                                                                                                 </Box>
                                                                                               }
@@ -3461,28 +3535,43 @@ export default function PortfolioSection() {
                                                                                               poolPair.apy
                                                                                             }
                                                                                             %
-                                                                                            <Icon
-                                                                                              as={
-                                                                                                FiInfo
-                                                                                              }
-                                                                                              boxSize={
-                                                                                                4
-                                                                                              }
-                                                                                              color="#FFFFFF"
-                                                                                              _hover={{
-                                                                                                color:
-                                                                                                  'gray.300',
-                                                                                              }}
-                                                                                            />
                                                                                           </Flex>
                                                                                         </Td>
                                                                                         <Td
                                                                                           h="45px"
                                                                                           isNumeric
                                                                                         >
-                                                                                          {formatNumber(
-                                                                                            poolPair.value,
-                                                                                          )}{' '}
+                                                                                          <Flex
+                                                                                            align="center"
+                                                                                            justify="flex-start"
+                                                                                            gap={2}
+                                                                                          >
+                                                                                            {formatNumber(
+                                                                                              poolPair.value,
+                                                                                            )}
+                                                                                            <InfoTooltipIcon
+                                                                                              label={
+                                                                                                <Box>
+                                                                                                  <Text
+                                                                                                    fontWeight="bold"
+                                                                                                    fontSize="11px"
+                                                                                                    mb={
+                                                                                                      0.5
+                                                                                                    }
+                                                                                                  >
+                                                                                                    Value
+                                                                                                    (USD)
+                                                                                                  </Text>
+                                                                                                  <Text
+                                                                                                    fontSize="11px"
+                                                                                                    textDecoration="underline"
+                                                                                                  >
+                                                                                                    0xd833...8D10
+                                                                                                  </Text>
+                                                                                                </Box>
+                                                                                              }
+                                                                                            />
+                                                                                          </Flex>
                                                                                         </Td>
                                                                                       </Tr>
                                                                                     );

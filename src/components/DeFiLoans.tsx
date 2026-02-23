@@ -25,6 +25,7 @@ interface CollateralAsset {
   suppliedApy: string;
   amount: string;
   valueUsd: string;
+  liquidationThreshold?: string;
 }
 
 interface BorrowAsset {
@@ -99,24 +100,28 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '0.35',
                   amount: '0.95000',
                   valueUsd: '120,000',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'WBTC',
                   suppliedApy: '0.30',
                   amount: '0.75000',
                   valueUsd: '95,000',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'tBTC',
                   suppliedApy: '0.40',
                   amount: '0.63000',
                   valueUsd: '80,000',
+                  liquidationThreshold: '75',
                 },
                 {
                   token: 'LBTC',
                   suppliedApy: '0.25',
                   amount: '0.47357',
                   valueUsd: '80,000',
+                  liquidationThreshold: '75',
                 },
               ],
               borrows: [
@@ -146,24 +151,28 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '0.80',
                   amount: '2.9500',
                   valueUsd: '16,740',
+                  liquidationThreshold: '78',
                 },
                 {
                   token: 'wstETH',
                   suppliedApy: '3.10',
                   amount: '1.7200',
                   valueUsd: '12,387',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'MATIC',
                   suppliedApy: '5.20',
                   amount: '18,500',
                   valueUsd: '8,475',
+                  liquidationThreshold: '70',
                 },
                 {
                   token: 'aETH',
                   suppliedApy: '2.95',
                   amount: '0.5400',
                   valueUsd: '2,348',
+                  liquidationThreshold: '80',
                 },
               ],
               borrows: [
@@ -193,18 +202,21 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '4.80',
                   amount: '9,500',
                   valueUsd: '11,400',
+                  liquidationThreshold: '70',
                 },
                 {
                   token: 'rETH',
                   suppliedApy: '2.90',
                   amount: '5.2000',
                   valueUsd: '17,680',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'wstETH',
                   suppliedApy: '3.50',
                   amount: '5.9000',
                   valueUsd: '21,067',
+                  liquidationThreshold: '80',
                 },
               ],
               borrows: [
@@ -243,18 +255,21 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '2.80',
                   amount: '1.2000',
                   valueUsd: '160,803',
+                  liquidationThreshold: '85',
                 },
                 {
                   token: 'WBTC',
                   suppliedApy: '2.10',
                   amount: '0.4500',
                   valueUsd: '56,850',
+                  liquidationThreshold: '85',
                 },
                 {
                   token: 'tBTC',
                   suppliedApy: '1.95',
                   amount: '0.1800',
                   valueUsd: '22,740',
+                  liquidationThreshold: '80',
                 },
               ],
               borrows: [
@@ -301,24 +316,28 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '3.20',
                   amount: '3.1487',
                   valueUsd: '22,279',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'rETH',
                   suppliedApy: '0.01',
                   amount: '2.0974',
                   valueUsd: '14,844',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'cbETH',
                   suppliedApy: '0.01',
                   amount: '1.9031',
                   valueUsd: '13,455',
+                  liquidationThreshold: '78',
                 },
                 {
                   token: 'WETH',
                   suppliedApy: '3.20',
                   amount: '2.8013',
                   valueUsd: '12,315',
+                  liquidationThreshold: '82.5',
                 },
               ],
               borrows: [
@@ -348,24 +367,28 @@ const DEFI_LOANS_DATA: {
                   suppliedApy: '3.80',
                   amount: '4.9000',
                   valueUsd: '20,560',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'WETH',
                   suppliedApy: '3.80',
                   amount: '2.9500',
                   valueUsd: '16,740',
+                  liquidationThreshold: '82.5',
                 },
                 {
                   token: 'WBTC',
                   suppliedApy: '0.25',
                   amount: '0.1873',
                   valueUsd: '8,520',
+                  liquidationThreshold: '80',
                 },
                 {
                   token: 'aETH',
                   suppliedApy: '3.80',
                   amount: '0.5400',
                   valueUsd: '2,348',
+                  liquidationThreshold: '80',
                 },
               ],
               borrows: [
@@ -1047,7 +1070,16 @@ export default function DeFiLoans() {
                                                                                 }
                                                                               </Text>
                                                                               <InfoTooltipIcon
-                                                                                label={`Info for ${c.token}`}
+                                                                                label={
+                                                                                  <Box p={1}>
+                                                                                    <Text fontSize="11px" color="gray.400" fontWeight="600">
+                                                                                      Liquidation Threshold
+                                                                                    </Text>
+                                                                                    <Text fontSize="12px" fontWeight="bold" color="white">
+                                                                                      {c.liquidationThreshold ?? 'N/A'}%
+                                                                                    </Text>
+                                                                                  </Box>
+                                                                                }
                                                                                 placement="top"
                                                                               />
                                                                             </Flex>

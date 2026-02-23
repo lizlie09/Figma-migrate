@@ -10,11 +10,34 @@ import {
 } from '@chakra-ui/react';
 import { FiInfo } from 'react-icons/fi';
 import { formatNumber, getTokenIconSrc } from './portfolioSectionUtils';
+import InfoTooltipIcon from './InfoTooltipIcon';
 import type {
   SuppliedBorrowedToken,
   WalletAddressData,
   WalletDetails,
+  ApyBreakdownItem,
 } from '../types/portfolio';
+
+function ApyBreakdownLabel({ breakdown }: { breakdown: ApyBreakdownItem[] }) {
+  return (
+    <Box p={1}>
+      {breakdown.map((item, i) => (
+        <Box key={i} mb={i < breakdown.length - 1 ? 2 : 0}>
+          <Text fontSize="11px" color="gray.400" fontWeight="600">
+            {item.label}
+          </Text>
+          <Text
+            fontSize="12px"
+            fontWeight="bold"
+            color={item.value.startsWith('-') ? '#FF6B6B' : 'white'}
+          >
+            {item.value}
+          </Text>
+        </Box>
+      ))}
+    </Box>
+  );
+}
 
 interface WalletDetailsRowProps {
   wallet: WalletAddressData & { details: WalletDetails };
@@ -64,13 +87,17 @@ export default function WalletDetailsRow({
                   <Text color="gray.400" fontSize="14px" mb={1}>
                     Health Factor:
                   </Text>
-                  <Box display="inline-block" mt={0.5}>
-                    <Box bg="#E05A5A" borderRadius="4px" px={2} py={1}>
-                      <Text fontWeight="bold" color="white" fontSize="12px">
-                        {wallet.details.healthFactor}
-                      </Text>
-                    </Box>
-                  </Box>
+                  <Text
+                    fontWeight="bold"
+                    fontSize="14px"
+                    color={
+                      Number(wallet.details.healthFactor) >= 1
+                        ? '#4CAF50'
+                        : '#E05A5A'
+                    }
+                  >
+                    {wallet.details.healthFactor}
+                  </Text>
                 </Box>
               </Flex>
             </Box>
@@ -92,6 +119,8 @@ export default function WalletDetailsRow({
                   {wallet.details.supplied.map(
                     (token: SuppliedBorrowedToken, idx: number) => {
                       const tokenIconSrc = getTokenIconSrc(token.token);
+                      const hasBreakdown =
+                        token.apyBreakdown && token.apyBreakdown.length > 0;
                       return (
                         <Box
                           key={`${walletKey}-supplied-${idx}`}
@@ -111,12 +140,28 @@ export default function WalletDetailsRow({
                                   />
                                 )}
                                 <Text fontWeight="600">{token.token}</Text>
-                                <Icon
-                                  as={FiInfo}
-                                  boxSize={4}
-                                  color="#FFFFFF"
-                                  _hover={{ color: 'gray.300' }}
-                                />
+                                {token.liquidationThreshold ? (
+                                  <InfoTooltipIcon
+                                    placement="top"
+                                    label={
+                                      <Box p={1}>
+                                        <Text fontSize="11px" color="gray.400" fontWeight="600">
+                                          Liquidation Threshold
+                                        </Text>
+                                        <Text fontSize="12px" fontWeight="bold" color="white">
+                                          {token.liquidationThreshold}%
+                                        </Text>
+                                      </Box>
+                                    }
+                                  />
+                                ) : (
+                                  <Icon
+                                    as={FiInfo}
+                                    boxSize={4}
+                                    color="#FFFFFF"
+                                    _hover={{ color: 'gray.300' }}
+                                  />
+                                )}
                               </Flex>
                             </Box>
 
@@ -140,9 +185,28 @@ export default function WalletDetailsRow({
                               <Text color="gray.400" fontSize="12px" mb={1}>
                                 Supplied APY
                               </Text>
-                              <Text color="#4CAF50" fontWeight="bold">
-                                {token.apy}%
-                              </Text>
+                              <Flex align="center" justify="center" gap={2}>
+                                <Text color="#4CAF50" fontWeight="bold">
+                                  {token.apy}%
+                                </Text>
+                                {hasBreakdown ? (
+                                  <InfoTooltipIcon
+                                    placement="top"
+                                    label={
+                                      <ApyBreakdownLabel
+                                        breakdown={token.apyBreakdown!}
+                                      />
+                                    }
+                                  />
+                                ) : (
+                                  <Icon
+                                    as={FiInfo}
+                                    boxSize={4}
+                                    color="#FFFFFF"
+                                    _hover={{ color: 'gray.300' }}
+                                  />
+                                )}
+                              </Flex>
                             </Box>
 
                             <Box flex="1" minW={0} textAlign="right">
@@ -170,6 +234,8 @@ export default function WalletDetailsRow({
                   {wallet.details.borrowed.map(
                     (token: SuppliedBorrowedToken, idx: number) => {
                       const tokenIconSrc = getTokenIconSrc(token.token);
+                      const hasBreakdown =
+                        token.apyBreakdown && token.apyBreakdown.length > 0;
                       return (
                         <Box
                           key={`${walletKey}-borrowed-${idx}`}
@@ -189,6 +255,28 @@ export default function WalletDetailsRow({
                                   />
                                 )}
                                 <Text fontWeight="600">{token.token}</Text>
+                                {token.liquidationThreshold ? (
+                                  <InfoTooltipIcon
+                                    placement="top"
+                                    label={
+                                      <Box p={1}>
+                                        <Text fontSize="11px" color="gray.400" fontWeight="600">
+                                          Liquidation Threshold
+                                        </Text>
+                                        <Text fontSize="12px" fontWeight="bold" color="white">
+                                          {token.liquidationThreshold}%
+                                        </Text>
+                                      </Box>
+                                    }
+                                  />
+                                ) : (
+                                  <Icon
+                                    as={FiInfo}
+                                    boxSize={4}
+                                    color="#FFFFFF"
+                                    _hover={{ color: 'gray.300' }}
+                                  />
+                                )}
                               </Flex>
                             </Box>
 
@@ -212,9 +300,28 @@ export default function WalletDetailsRow({
                               <Text color="gray.400" fontSize="12px" mb={1}>
                                 Borrowed APY
                               </Text>
-                              <Text color="#FF9800" fontWeight="bold">
-                                {token.apy}%
-                              </Text>
+                              <Flex align="center" justify="center" gap={2}>
+                                <Text color="#FF9800" fontWeight="bold">
+                                  {token.apy}%
+                                </Text>
+                                {hasBreakdown ? (
+                                  <InfoTooltipIcon
+                                    placement="top"
+                                    label={
+                                      <ApyBreakdownLabel
+                                        breakdown={token.apyBreakdown!}
+                                      />
+                                    }
+                                  />
+                                ) : (
+                                  <Icon
+                                    as={FiInfo}
+                                    boxSize={4}
+                                    color="#FFFFFF"
+                                    _hover={{ color: 'gray.300' }}
+                                  />
+                                )}
+                              </Flex>
                             </Box>
 
                             <Box flex="1" minW={0} textAlign="right">
